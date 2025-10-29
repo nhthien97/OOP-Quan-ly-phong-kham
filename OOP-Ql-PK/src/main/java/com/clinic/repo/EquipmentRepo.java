@@ -1,1 +1,0 @@
-package com.clinic.repo; import com.clinic.domain.Equipment; import org.springframework.data.jpa.repository.JpaRepository; public interface EquipmentRepo extends JpaRepository<Equipment, Long> {}
