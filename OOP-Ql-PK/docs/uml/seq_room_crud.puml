@@ -1,0 +1,11 @@
+
+@startuml
+title Room CRUD Sequence (Create)
+actor User
+participant Web as RoomController
+participant Repo as RoomRepo
+User -> RoomController: POST /rooms (form)
+RoomController -> Repo: save(entity)
+Repo --> RoomController: entity
+RoomController --> User: redirect list
+@enduml

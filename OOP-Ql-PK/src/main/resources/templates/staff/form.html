@@ -1,0 +1,27 @@
+<th:block th:replace="_header :: _"></th:block>
+<h4>Thêm/Sửa</h4>
+<form th:action="${item.id} != null ? @('/staff/' + ${item.id}) : @('/staff')" method="post" class="bg-white p-3 rounded shadow-sm">
+<div class="mb-2"><label class="form-label">code</label>
+<input class="form-control" name="code" th:value="${item.code}"/></div>
+<div class="mb-2"><label class="form-label">fullName</label>
+<input class="form-control" name="fullName" th:value="${item.fullName}"/></div>
+<div class="mb-2"><label class="form-label">role</label>
+<input class="form-control" name="role" th:value="${item.role}"/></div>
+<div class="mb-2"><label class="form-label">phone</label>
+<input class="form-control" name="phone" th:value="${item.phone}"/></div>
+<div class="mb-2"><label class="form-label">idCard</label>
+<input class="form-control" name="idCard" th:value="${item.idCard}"/></div>
+<button class="btn btn-primary">Lưu</button>
+<a href="/staff" class="btn btn-secondary">Trở về</a>
+
+<div class="mb-2">
+  <label class="form-label">Department</label>
+  <select class="form-select" name="department.id">
+    <option th:each="d: ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
+  </select>
+</div>
+<button class="btn btn-primary">Lưu</button>
+<a href="/staff" class="btn btn-secondary">Trở về</a>
+</form>
+
+<th:block th:replace="_footer :: _"></th:block>

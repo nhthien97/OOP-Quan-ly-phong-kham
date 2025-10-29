@@ -1,0 +1,20 @@
+
+@startuml
+title MVC Components (Structural)
+package "Web" {
+  [HomeController]-->[Templates]
+  [PatientController]-->[Templates]
+}
+package "Service" {
+  [AdmissionService]
+}
+package "Data" {
+  [Repositories]-->[MySQL]
+}
+[PatientController]-->[PatientRepo]
+[StaffController]-->[StaffRepo]
+[DepartmentController]-->[DepartmentRepo]
+[RoomController]-->[RoomRepo]
+[EquipmentController]-->[EquipmentRepo]
+[AdmissionController]-->[AdmissionService]
+@enduml

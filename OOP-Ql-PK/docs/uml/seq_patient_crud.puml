@@ -1,0 +1,11 @@
+
+@startuml
+title Patient CRUD Sequence (Create)
+actor User
+participant Web as PatientController
+participant Repo as PatientRepo
+User -> PatientController: POST /patients (form)
+PatientController -> Repo: save(entity)
+Repo --> PatientController: entity
+PatientController --> User: redirect list
+@enduml

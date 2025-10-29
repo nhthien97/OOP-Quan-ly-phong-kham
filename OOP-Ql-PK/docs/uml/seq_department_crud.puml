@@ -1,0 +1,11 @@
+
+@startuml
+title Department CRUD Sequence (Create)
+actor User
+participant Web as DepartmentController
+participant Repo as DepartmentRepo
+User -> DepartmentController: POST /departments (form)
+DepartmentController -> Repo: save(entity)
+Repo --> DepartmentController: entity
+DepartmentController --> User: redirect list
+@enduml

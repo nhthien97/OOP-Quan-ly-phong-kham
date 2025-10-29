@@ -1,0 +1,23 @@
+<th:block th:replace="_header :: _"></th:block>
+<h4>Thêm/Sửa</h4>
+<form th:action="${item.id} != null ? @('/equipment/' + ${item.id}) : @('/equipment')" method="post" class="bg-white p-3 rounded shadow-sm">
+<div class="mb-2"><label class="form-label">code</label>
+<input class="form-control" name="code" th:value="${item.code}"/></div>
+<div class="mb-2"><label class="form-label">name</label>
+<input class="form-control" name="name" th:value="${item.name}"/></div>
+<div class="mb-2"><label class="form-label">status</label>
+<input class="form-control" name="status" th:value="${item.status}"/></div>
+<button class="btn btn-primary">Lưu</button>
+<a href="/equipment" class="btn btn-secondary">Trở về</a>
+
+<div class="mb-2">
+  <label class="form-label">Room</label>
+  <select class="form-select" name="room.id">
+    <option th:each="d: ${rooms}" th:value="${d.id}" th:text="${d.code}"></option>
+  </select>
+</div>
+<button class="btn btn-primary">Lưu</button>
+<a href="/equipment" class="btn btn-secondary">Trở về</a>
+</form>
+
+<th:block th:replace="_footer :: _"></th:block>
