@@ -1,0 +1,1 @@
+package com.clinic.repo; import com.clinic.domain.Department; import org.springframework.data.jpa.repository.JpaRepository; public interface DepartmentRepo extends JpaRepository<Department, Long> {}
