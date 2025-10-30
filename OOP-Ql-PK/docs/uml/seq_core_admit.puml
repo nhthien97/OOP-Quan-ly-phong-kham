@@ -1,0 +1,18 @@
+
+@startuml
+title Admit Patient (Core) Sequence
+actor User
+participant AdmissionController
+participant AdmissionService
+participant PatientRepo
+participant RoomRepo
+participant AdmissionRepo
+User -> AdmissionController: POST /admissions (patientCode, roomCode)
+AdmissionController -> AdmissionService: admit(patientCode, roomCode)
+AdmissionService -> PatientRepo: findByCode(code)
+AdmissionService -> RoomRepo: findByCode(code)
+AdmissionService -> AdmissionRepo: save(Admission{checkIn=now})
+AdmissionService -> RoomRepo: save(room.occupied+1)
+AdmissionService --> AdmissionController: Admission
+AdmissionController --> User: redirect /admissions
+@enduml

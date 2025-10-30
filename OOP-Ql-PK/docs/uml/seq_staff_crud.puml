@@ -1,0 +1,11 @@
+
+@startuml
+title Staff CRUD Sequence (Create)
+actor User
+participant Web as StaffController
+participant Repo as StaffRepo
+User -> StaffController: POST /staffs (form)
+StaffController -> Repo: save(entity)
+Repo --> StaffController: entity
+StaffController --> User: redirect list
+@enduml
