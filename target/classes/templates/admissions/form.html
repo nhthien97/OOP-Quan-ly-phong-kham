@@ -1,0 +1,17 @@
+<th:block th:replace="_header :: _"></th:block>
+<h4>Nhận bệnh nhân vào phòng</h4>
+<form action="/admissions" method="post" class="bg-white p-3 rounded shadow-sm">
+<div class="mb-2">
+<label class="form-label">Bệnh nhân</label>
+<select class="form-select" name="patientCode">
+<option th:each="p: ${patients}" th:text="${p.fullName} + ' (' + ${p.code} + ')'" th:value="${p.code}"></option>
+</select></div>
+<div class="mb-2">
+<label class="form-label">Phòng</label>
+<select class="form-select" name="roomCode">
+<option th:each="r: ${rooms}" th:text="${r.code} + ' - ' + ${r.type} + ' (' + ${r.occupied} + '/' + ${r.capacity} + ')'" th:value="${r.code}"></option>
+</select></div>
+<button class="btn btn-primary">Nhận</button>
+<a href="/admissions" class="btn btn-secondary">Trở về</a>
+</form>
+<th:block th:replace="_footer :: _"></th:block>
