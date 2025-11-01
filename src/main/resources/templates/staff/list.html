@@ -10,9 +10,10 @@
 <div class="container mt-4">
     <h4>Danh sách nhân viên</h4>
 
+    <!-- Form tìm kiếm -->
     <form method="get" th:action="@{/staff}" class="row mb-3">
         <div class="col-md-4">
-            <input class="form-control" type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tên...">
+            <input class="form-control" type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo mã hoặc tên...">
         </div>
         <div class="col-auto">
             <button class="btn btn-primary">Tìm kiếm</button>
@@ -20,8 +21,10 @@
         </div>
     </form>
 
+    <!-- Nút thêm mới -->
     <a class="btn btn-success mb-2" href="/staff/new">➕ Thêm nhân viên</a>
 
+    <!-- Bảng danh sách -->
     <table class="table table-bordered bg-white">
         <thead>
         <tr>

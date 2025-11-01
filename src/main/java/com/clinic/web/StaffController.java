@@ -19,11 +19,12 @@ public class StaffController {
         this.departmentRepo = departmentRepo;
     }
 
-    // 🟢 DANH SÁCH (CÓ TÌM KIẾM)
+    // 🟢 DANH SÁCH (CÓ TÌM KIẾM THEO MÃ HOẶC TÊN)
     @GetMapping
     public String list(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
         if (keyword != null && !keyword.isEmpty()) {
-            model.addAttribute("items", staffRepo.findByFullNameContainingIgnoreCase(keyword));
+            model.addAttribute("items",
+                staffRepo.findByCodeContainingIgnoreCaseOrFullNameContainingIgnoreCase(keyword, keyword));
         } else {
             model.addAttribute("items", staffRepo.findAll());
         }
@@ -42,7 +43,8 @@ public class StaffController {
     // 🟢 FORM SỬA
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
-        Staff s = staffRepo.findById(id).orElseThrow(() -> new IllegalArgumentException("Không tìm thấy nhân viên với ID: " + id));
+        Staff s = staffRepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy nhân viên với ID: " + id));
         model.addAttribute("item", s);
         model.addAttribute("departments", departmentRepo.findAll());
         return "staff/form";
@@ -50,10 +52,7 @@ public class StaffController {
 
     // 🟢 LƯU (THÊM / SỬA)
     @PostMapping
-    public String createOrUpdate(
-            @ModelAttribute Staff s,
-            @RequestParam("department") Long departmentId
-    ) {
+    public String createOrUpdate(@ModelAttribute Staff s, @RequestParam("department") Long departmentId) {
         s.setDepartment(departmentRepo.findById(departmentId).orElse(null));
         staffRepo.save(s);
         return "redirect:/staff";
