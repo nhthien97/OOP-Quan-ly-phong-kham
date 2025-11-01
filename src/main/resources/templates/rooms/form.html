@@ -1,25 +1,41 @@
 <th:block th:replace="_header :: _"></th:block>
-<h4>Thêm/Sửa</h4>
-<form th:action="${item.id} != null ? @('/rooms/' + ${item.id}) : @('/rooms')" method="post" class="bg-white p-3 rounded shadow-sm">
-<div class="mb-2"><label class="form-label">code</label>
-<input class="form-control" name="code" th:value="${item.code}"/></div>
-<div class="mb-2"><label class="form-label">type</label>
-<input class="form-control" name="type" th:value="${item.type}"/></div>
-<div class="mb-2"><label class="form-label">capacity</label>
-<input class="form-control" name="capacity" th:value="${item.capacity}"/></div>
-<div class="mb-2"><label class="form-label">occupied</label>
-<input class="form-control" name="occupied" th:value="${item.occupied}"/></div>
-<button class="btn btn-primary">Lưu</button>
-<a href="/rooms" class="btn btn-secondary">Trở về</a>
+<div class="container mt-4">
+    <h4>Thêm / Sửa phòng</h4>
 
-<div class="mb-2">
-  <label class="form-label">Department</label>
-  <select class="form-select" name="department.id">
-    <option th:each="d: ${departments}" th:value="${d.id}" th:text="${d.name}"></option>
-  </select>
+    <form th:action="${item.id != null} ? @{'/rooms/' + ${item.id}} : @{/rooms}" method="post" class="bg-white p-3 rounded shadow-sm">
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-2">
+            <label class="form-label">Mã phòng</label>
+            <input class="form-control" name="code" th:value="${item.code}" required />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Loại phòng</label>
+            <input class="form-control" name="type" th:value="${item.type}" />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Sức chứa</label>
+            <input class="form-control" name="capacity" type="number" th:value="${item.capacity}" />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Đã sử dụng</label>
+            <input class="form-control" name="occupied" type="number" th:value="${item.occupied}" />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Khoa</label>
+            <select class="form-select" name="department.id">
+                <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"
+                        th:selected="${item.department != null and d.id == item.department.id}">
+                </option>
+            </select>
+        </div>
+
+        <button class="btn btn-primary">Lưu</button>
+        <a href="/rooms" class="btn btn-secondary">Trở về</a>
+    </form>
 </div>
-<button class="btn btn-primary">Lưu</button>
-<a href="/rooms" class="btn btn-secondary">Trở về</a>
-</form>
-
 <th:block th:replace="_footer :: _"></th:block>

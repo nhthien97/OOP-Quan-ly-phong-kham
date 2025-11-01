@@ -1,21 +1,48 @@
 <th:block th:replace="_header :: _"></th:block>
-<h4>Danh sách rooms</h4>
-<a class="btn btn-success mb-2" href="/rooms/new">Thêm</a>
-<table class="table table-bordered bg-white">
-  <thead><tr><th>ID</th><th>code</th><th>type</th><th>capacity</th><th>occupied</th><th>Hành động</th></tr></thead><tbody>
-<tr th:each="it: ${items}">
-  <td th:text="${it.id}"></td>
-  <td th:text="${it.code}"></td>
-  <td th:text="${it.type}"></td>
-  <td th:text="${it.capacity}"></td>
-  <td th:text="${it.occupied}"></td>
+<div class="container mt-4">
+    <h4>Danh sách phòng</h4>
 
-  <td>
-    <a class="btn btn-sm btn-primary" th:href="@('/rooms/' + ${it.id} + '/edit')">Sửa</a>
-    <form th:action="@('/rooms/' + ${it.id} + '/delete')" method="post" style="display:inline">
-      <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</button>
+    <!-- 🔍 Form tìm kiếm -->
+    <form method="get" th:action="@{/rooms}" class="row mb-3">
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo mã phòng...">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">Tìm kiếm</button>
+            <a class="btn btn-secondary" href="/rooms">Tải lại</a>
+        </div>
     </form>
-  </td>
-</tr>
-</tbody></table>
+
+    <a class="btn btn-success mb-2" href="/rooms/new">➕ Thêm phòng</a>
+
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mã</th>
+            <th>Loại</th>
+            <th>Sức chứa</th>
+            <th>Đang dùng</th>
+            <th>Khoa</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="it : ${items}">
+            <td th:text="${it.id}"></td>
+            <td th:text="${it.code}"></td>
+            <td th:text="${it.type}"></td>
+            <td th:text="${it.capacity}"></td>
+            <td th:text="${it.occupied}"></td>
+            <td th:text="${it.department != null ? it.department.name : 'Chưa phân khoa'}"></td>
+            <td>
+                <a class="btn btn-sm btn-primary" th:href="@{'/rooms/' + ${it.id} + '/edit'}">Sửa</a>
+                <form th:action="@{'/rooms/' + ${it.id} + '/delete'}" method="post" style="display:inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 <th:block th:replace="_footer :: _"></th:block>
