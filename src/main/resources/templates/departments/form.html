@@ -1,11 +1,25 @@
-<th:block th:replace="_header :: _"></th:block>
-<h4>Thêm/Sửa</h4>
-<form th:action="${item.id} != null ? @('/departments/' + ${item.id}) : @('/departments')" method="post" class="bg-white p-3 rounded shadow-sm">
-<div class="mb-2"><label class="form-label">name</label>
-<input class="form-control" name="name" th:value="${item.name}"/></div>
-<div class="mb-2"><label class="form-label">facility</label>
-<input class="form-control" name="facility" th:value="${item.facility}"/></div>
-<button class="btn btn-primary">Lưu</button>
-<a href="/departments" class="btn btn-secondary">Trở về</a>
-</form>
-<th:block th:replace="_footer :: _"></th:block>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm / Sửa khoa</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container mt-4">
+    <h4>Thêm / Sửa Khoa Phòng</h4>
+    <form th:action="${item.id} != null ? @{'/departments/' + ${item.id}} : @{/departments}" method="post" class="bg-white p-3 rounded shadow-sm">
+        <div class="mb-2">
+            <label class="form-label">Tên khoa</label>
+            <input class="form-control" name="name" th:value="${item.name}" required>
+        </div>
+        <div class="mb-2">
+            <label class="form-label">Cơ sở</label>
+            <input class="form-control" name="facility" th:value="${item.facility}">
+        </div>
+        <button class="btn btn-primary">Lưu</button>
+        <a href="/departments" class="btn btn-secondary">Trở về</a>
+    </form>
+</div>
+</body>
+</html>
