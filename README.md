@@ -1,5 +1,4 @@
 # OOP-Ql-PK – Quản lý phòng khám
-Cô Thu
 
 ## Công nghệ
 - Spring Boot 3 (Web, Thymeleaf, Data JPA)
@@ -36,4 +35,4 @@ Có thể xem trực tiếp file `.puml` bằng VSCode extension hoặc plantuml
 ## Giao diện
 - Navbar mô phỏng menu: Bệnh nhân, Bác sĩ & Nhân viên, Khoa/Phòng, Phòng/Giường, Thiết bị, Nhận phòng.
 - Form + bảng Bootstrap, thao tác **Thêm/Sửa/Xóa**.
-
+thêm sửa xóa
