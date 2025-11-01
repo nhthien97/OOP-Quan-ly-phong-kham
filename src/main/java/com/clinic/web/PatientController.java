@@ -16,10 +16,17 @@ public class PatientController {
         this.repo = repo;
     }
 
-    // 🟢 1. HIỂN THỊ DANH SÁCH
+    // 🟢 1. HIỂN THỊ DANH SÁCH + TÌM KIẾM
     @GetMapping
-    public String list(Model model) {
-        model.addAttribute("patients", repo.findAll());
+    public String list(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.isBlank()) {
+            model.addAttribute("patients",
+                    repo.findByFullNameContainingIgnoreCaseOrCodeContainingIgnoreCase(keyword, keyword));
+        } else {
+            model.addAttribute("patients", repo.findAll());
+        }
+
+        model.addAttribute("keyword", keyword);
         return "patients/list";
     }
 

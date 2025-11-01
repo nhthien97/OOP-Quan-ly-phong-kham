@@ -11,32 +11,46 @@
 
 <div class="container mt-4">
     <h4>Danh sách bệnh nhân</h4>
+
+    <!-- 🔍 Form tìm kiếm -->
+    <form class="row mb-3" method="get" th:action="@{/patients}">
+        <div class="col-md-6">
+            <input type="text" name="keyword" class="form-control"
+                   placeholder="Nhập mã hoặc tên bệnh nhân..."
+                   th:value="${keyword}">
+        </div>
+        <div class="col-md-auto">
+            <button class="btn btn-primary" type="submit">🔍 Tìm kiếm</button>
+            <a class="btn btn-secondary" th:href="@{/patients}">🔄 Làm mới</a>
+        </div>
+    </form>
+
     <a class="btn btn-success mb-2" href="/patients/create">➕ Thêm bệnh nhân</a>
 
     <table class="table table-bordered table-hover bg-white">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Mã</th>
-                <th>Họ tên</th>
-                <th>Địa chỉ</th>
-                <th>Điện thoại</th>
-                <th>Hành động</th>
-            </tr>
+        <tr>
+            <th>ID</th>
+            <th>Mã</th>
+            <th>Họ tên</th>
+            <th>Địa chỉ</th>
+            <th>Điện thoại</th>
+            <th>Hành động</th>
+        </tr>
         </thead>
         <tbody>
-            <tr th:each="p : ${patients}">
-                <td th:text="${p.id}">1</td>
-                <td th:text="${p.code}">BN001</td>
-                <td th:text="${p.fullName}">Nguyễn Văn A</td>
-                <td th:text="${p.address}">Hà Nội</td>
-                <td th:text="${p.phone}">0123456789</td>
-                <td>
-                    <a class="btn btn-sm btn-primary" th:href="@{'/patients/edit/' + ${p.id}}">Sửa</a>
-                    <a class="btn btn-sm btn-danger" th:href="@{'/patients/delete/' + ${p.id}}"
-                       onclick="return confirm('Bạn chắc chắn muốn xoá?')">Xoá</a>
-                </td>
-            </tr>
+        <tr th:each="p : ${patients}">
+            <td th:text="${p.id}">1</td>
+            <td th:text="${p.code}">BN001</td>
+            <td th:text="${p.fullName}">Nguyễn Văn A</td>
+            <td th:text="${p.address}">Hà Nội</td>
+            <td th:text="${p.phone}">0123456789</td>
+            <td>
+                <a class="btn btn-sm btn-primary" th:href="@{'/patients/edit/' + ${p.id}}">Sửa</a>
+                <a class="btn btn-sm btn-danger" th:href="@{'/patients/delete/' + ${p.id}}"
+                   onclick="return confirm('Bạn chắc chắn muốn xoá?')">Xoá</a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
