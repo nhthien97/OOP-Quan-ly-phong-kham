@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<div th:fragment="_">
+<div th:fragment="_footer">
   <footer class="bg-light text-center py-3 mt-5 border-top">
     <p class="mb-0 text-muted">© 2025 Phòng khám — Hệ thống quản lý OOP-QL-PK</p>
   </footer>
 
-  <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+  <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </div>
 </body>
 </html>

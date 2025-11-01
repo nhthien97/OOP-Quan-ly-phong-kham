@@ -1,41 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="_header :: _"></th:block>
+<body>
 <div class="container mt-4">
-    <h4>Thêm / Sửa phòng</h4>
+    <h4>Thêm / Sửa Phòng</h4>
 
-    <form th:action="${item.id != null} ? @{'/rooms/' + ${item.id}} : @{/rooms}" method="post" class="bg-white p-3 rounded shadow-sm">
-        <input type="hidden" th:field="*{id}" />
+    <form th:action="${item.id != null} ? @{'/rooms/' + ${item.id}} : @{/rooms}" method="post" th:object="${item}" class="bg-white p-3 rounded shadow-sm">
+        <input type="hidden" th:field="*{id}"/>
 
         <div class="mb-2">
             <label class="form-label">Mã phòng</label>
-            <input class="form-control" name="code" th:value="${item.code}" required />
+            <input class="form-control" th:field="*{code}" required>
         </div>
 
         <div class="mb-2">
             <label class="form-label">Loại phòng</label>
-            <input class="form-control" name="type" th:value="${item.type}" />
+            <input class="form-control" th:field="*{type}">
         </div>
 
         <div class="mb-2">
             <label class="form-label">Sức chứa</label>
-            <input class="form-control" name="capacity" type="number" th:value="${item.capacity}" />
+            <input class="form-control" th:field="*{capacity}">
         </div>
 
         <div class="mb-2">
-            <label class="form-label">Đã sử dụng</label>
-            <input class="form-control" name="occupied" type="number" th:value="${item.occupied}" />
+            <label class="form-label">Số đã sử dụng</label>
+            <input class="form-control" th:field="*{occupied}">
         </div>
 
         <div class="mb-2">
             <label class="form-label">Khoa</label>
             <select class="form-select" name="department.id">
-                <option th:each="d : ${departments}" th:value="${d.id}" th:text="${d.name}"
-                        th:selected="${item.department != null and d.id == item.department.id}">
-                </option>
+                <option th:each="d : ${departments}" th:value="${d.id}"
+                        th:selected="${item.department != null and d.id == item.department.id}"
+                        th:text="${d.name}">Khoa</option>
             </select>
         </div>
 
         <button class="btn btn-primary">Lưu</button>
-        <a href="/rooms" class="btn btn-secondary">Trở về</a>
+        <a href="/rooms" class="btn btn-secondary">Trở lại</a>
     </form>
 </div>
 <th:block th:replace="_footer :: _"></th:block>
+</body>
+</html>

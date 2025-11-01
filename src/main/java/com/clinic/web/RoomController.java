@@ -1,8 +1,8 @@
 package com.clinic.web;
 
 import com.clinic.domain.Room;
-import com.clinic.repo.DepartmentRepo;
 import com.clinic.repo.RoomRepo;
+import com.clinic.repo.DepartmentRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,64 +10,65 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/rooms")
 public class RoomController {
-    private final RoomRepo repo;
-    private final DepartmentRepo depRepo;
+    private final RoomRepo roomRepo;
+    private final DepartmentRepo departmentRepo;
 
-    public RoomController(RoomRepo repo, DepartmentRepo depRepo) {
-        this.repo = repo;
-        this.depRepo = depRepo;
+    public RoomController(RoomRepo roomRepo, DepartmentRepo departmentRepo) {
+        this.roomRepo = roomRepo;
+        this.departmentRepo = departmentRepo;
     }
 
-    // 🔍 DANH SÁCH + TÌM KIẾM
+    // ✅ DANH SÁCH + TÌM KIẾM THEO CODE
     @GetMapping
     public String list(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
         if (keyword != null && !keyword.isEmpty()) {
-            model.addAttribute("items", repo.findByCodeContainingIgnoreCase(keyword));
+            model.addAttribute("items", roomRepo.findByCodeContainingIgnoreCase(keyword));
         } else {
-            model.addAttribute("items", repo.findAll());
+            model.addAttribute("items", roomRepo.findAll());
         }
         model.addAttribute("keyword", keyword);
         return "rooms/list";
     }
 
-    // 🟢 FORM THÊM MỚI
+    // ✅ HIỂN THỊ FORM THÊM PHÒNG
     @GetMapping("/new")
-    public String form(Model m) {
-        m.addAttribute("item", new Room());
-        m.addAttribute("departments", depRepo.findAll());
+    public String form(Model model) {
+        model.addAttribute("item", new Room());
+        model.addAttribute("departments", departmentRepo.findAll());
         return "rooms/form";
     }
 
-    // 🟢 LƯU (THÊM MỚI)
+    // ✅ XỬ LÝ TẠO MỚI PHÒNG
     @PostMapping
-    public String create(Room r, @RequestParam("department.id") Long depId) {
-        if (r.getOccupied() == null) r.setOccupied(0);
-        r.setDepartment(depRepo.findById(depId).orElse(null));
-        repo.save(r);
+    public String create(Room room, @RequestParam("department.id") Long depId) {
+        if (room.getOccupied() == null) room.setOccupied(0);
+        room.setDepartment(departmentRepo.findById(depId).orElse(null));
+        roomRepo.save(room);
         return "redirect:/rooms";
     }
 
-    // 🟢 FORM CHỈNH SỬA
+    // ✅ FORM SỬA PHÒNG
     @GetMapping("/{id}/edit")
-    public String edit(@PathVariable Long id, Model m) {
-        m.addAttribute("item", repo.findById(id).orElseThrow());
-        m.addAttribute("departments", depRepo.findAll());
+    public String edit(@PathVariable Long id, Model model) {
+        Room room = roomRepo.findById(id).orElseThrow();
+        model.addAttribute("item", room);
+        model.addAttribute("departments", departmentRepo.findAll());
         return "rooms/form";
     }
 
-    // 🟢 CẬP NHẬT
+    // ✅ CẬP NHẬT PHÒNG
     @PostMapping("/{id}")
-    public String update(@PathVariable Long id, Room r, @RequestParam("department.id") Long depId) {
-        r.setId(id);
-        r.setDepartment(depRepo.findById(depId).orElse(null));
-        repo.save(r);
+    public String update(@PathVariable Long id, Room room, @RequestParam("department.id") Long depId) {
+        room.setId(id);
+        room.setDepartment(departmentRepo.findById(depId).orElse(null));
+        roomRepo.save(room);
         return "redirect:/rooms";
     }
 
-    // 🗑️ XOÁ
+    // ✅ XOÁ PHÒNG
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable Long id) {
-        repo.deleteById(id);
+        roomRepo.deleteById(id);
         return "redirect:/rooms";
     }
 }

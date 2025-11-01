@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Phòng khám</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
 <body>
-<div th:fragment="_">
+<!-- ⚠️ CHỈ phần navbar nằm trong fragment -->
+<div th:fragment="_header">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="/">Phòng khám</a>
@@ -18,5 +24,3 @@
     </div>
   </nav>
 </div>
-</body>
-</html>
