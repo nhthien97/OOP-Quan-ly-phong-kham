@@ -1,22 +1,60 @@
-<th:block th:replace="_header :: _"></th:block>
-<h4>Danh sách staff</h4>
-<a class="btn btn-success mb-2" href="/staff/new">Thêm</a>
-<table class="table table-bordered bg-white">
-  <thead><tr><th>ID</th><th>code</th><th>fullName</th><th>role</th><th>phone</th><th>idCard</th><th>Hành động</th></tr></thead><tbody>
-<tr th:each="it: ${items}">
-  <td th:text="${it.id}"></td>
-  <td th:text="${it.code}"></td>
-  <td th:text="${it.fullName}"></td>
-  <td th:text="${it.role}"></td>
-  <td th:text="${it.phone}"></td>
-  <td th:text="${it.idCard}"></td>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách nhân viên</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
 
-  <td>
-    <a class="btn btn-sm btn-primary" th:href="@('/staff/' + ${it.id} + '/edit')">Sửa</a>
-    <form th:action="@('/staff/' + ${it.id} + '/delete')" method="post" style="display:inline">
-      <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</button>
+<div class="container mt-4">
+    <h4>Danh sách nhân viên</h4>
+
+    <form method="get" th:action="@{/staff}" class="row mb-3">
+        <div class="col-md-4">
+            <input class="form-control" type="text" name="keyword" th:value="${keyword}" placeholder="Tìm theo tên...">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary">Tìm kiếm</button>
+            <a class="btn btn-secondary" href="/staff">Tải lại</a>
+        </div>
     </form>
-  </td>
-</tr>
-</tbody></table>
-<th:block th:replace="_footer :: _"></th:block>
+
+    <a class="btn btn-success mb-2" href="/staff/new">➕ Thêm nhân viên</a>
+
+    <table class="table table-bordered bg-white">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Mã</th>
+            <th>Họ tên</th>
+            <th>Chức vụ</th>
+            <th>Phone</th>
+            <th>CMND/CCCD</th>
+            <th>Khoa</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${items}">
+            <td th:text="${s.id}">1</td>
+            <td th:text="${s.code}">NV001</td>
+            <td th:text="${s.fullName}">Nguyễn Văn A</td>
+            <td th:text="${s.role}">Bác sĩ</td>
+            <td th:text="${s.phone}">0123456789</td>
+            <td th:text="${s.idCard}">123456789</td>
+            <td th:text="${s.department != null ? s.department.name : 'Chưa phân khoa'}">Khoa</td>
+            <td>
+                <a class="btn btn-sm btn-primary" th:href="@{'/staff/' + ${s.id} + '/edit'}">Sửa</a>
+                <form th:action="@{'/staff/' + ${s.id} + '/delete'}" method="post" style="display:inline">
+                    <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
