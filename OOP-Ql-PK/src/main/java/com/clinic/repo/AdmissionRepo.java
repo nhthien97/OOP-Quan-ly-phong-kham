@@ -1,1 +1,0 @@
-package com.clinic.repo; import com.clinic.domain.Admission; import org.springframework.data.jpa.repository.JpaRepository; public interface AdmissionRepo extends JpaRepository<Admission, Long> {}
