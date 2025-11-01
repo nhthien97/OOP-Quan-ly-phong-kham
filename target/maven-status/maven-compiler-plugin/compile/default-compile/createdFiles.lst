@@ -1,5 +1,5 @@
-com/clinic/domain/Department$DepartmentBuilder.class
 com/clinic/domain/Admission$AdmissionBuilder.class
+com/clinic/domain/Department$DepartmentBuilder.class
 com/clinic/domain/Department.class
 com/clinic/ClinicApp.class
 com/clinic/domain/Patient.class
@@ -16,10 +16,10 @@ com/clinic/domain/Admission.class
 com/clinic/web/RoomController.class
 com/clinic/repo/EquipmentRepo.class
 com/clinic/repo/PatientRepo.class
-com/clinic/service/AdmissionService.class
+com/clinic/web/DepartmentController.class
 com/clinic/web/PatientController.class
 com/clinic/web/HomeController.class
-com/clinic/web/DepartmentController.class
+com/clinic/service/AdmissionService.class
 com/clinic/repo/AdmissionRepo.class
 com/clinic/domain/Equipment.class
 com/clinic/domain/Staff$StaffBuilder.class

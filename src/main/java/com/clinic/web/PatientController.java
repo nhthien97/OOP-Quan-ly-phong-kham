@@ -1,4 +1,3 @@
-
 package com.clinic.web;
 
 import com.clinic.domain.Patient;
@@ -10,13 +9,47 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/patients")
 public class PatientController {
-    private final PatientRepo repo;
-    public PatientController(PatientRepo repo){this.repo=repo;}
 
-    @GetMapping public String list(Model model){ model.addAttribute("items", repo.findAll()); return "patients/list";}
-    @GetMapping("/new") public String createForm(Model m){ m.addAttribute("item", new Patient()); return "patients/form";}
-    @PostMapping public String create(Patient p){ repo.save(p); return "redirect:/patients";}
-    @GetMapping("/{id}/edit") public String editForm(@PathVariable Long id, Model m){ m.addAttribute("item", repo.findById(id).orElseThrow()); return "patients/form";}
-    @PostMapping("/{id}") public String update(@PathVariable Long id, Patient p){ p.setId(id); repo.save(p); return "redirect:/patients";}
-    @PostMapping("/{id}/delete") public String delete(@PathVariable Long id){ repo.deleteById(id); return "redirect:/patients";}
+    private final PatientRepo repo;
+
+    public PatientController(PatientRepo repo) {
+        this.repo = repo;
+    }
+
+    // 🟢 1. HIỂN THỊ DANH SÁCH
+    @GetMapping
+    public String list(Model model) {
+        model.addAttribute("patients", repo.findAll());
+        return "patients/list";
+    }
+
+    // 🟢 2. FORM THÊM MỚI
+    @GetMapping("/create")
+    public String createForm(Model model) {
+        model.addAttribute("patient", new Patient());
+        return "patients/form";
+    }
+
+    // 🟢 3. FORM CHỈNH SỬA
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        Patient patient = repo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy bệnh nhân ID: " + id));
+        model.addAttribute("patient", patient);
+        return "patients/form";
+    }
+
+    // 🟢 4. LƯU (THÊM / CẬP NHẬT)
+    @PostMapping("/save")
+    public String save(@ModelAttribute Patient patient) {
+        repo.save(patient);
+        return "redirect:/patients";
+    }
+
+    // 🟢 5. XOÁ
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        repo.deleteById(id);
+        return "redirect:/patients";
+    }
 }

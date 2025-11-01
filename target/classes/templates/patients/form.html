@@ -1,15 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm / Sửa Bệnh nhân</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body>
+
 <th:block th:replace="_header :: _"></th:block>
-<h4>Thêm/Sửa</h4>
-<form th:action="${item.id} != null ? @('/patients/' + ${item.id}) : @('/patients')" method="post" class="bg-white p-3 rounded shadow-sm">
-<div class="mb-2"><label class="form-label">code</label>
-<input class="form-control" name="code" th:value="${item.code}"/></div>
-<div class="mb-2"><label class="form-label">fullName</label>
-<input class="form-control" name="fullName" th:value="${item.fullName}"/></div>
-<div class="mb-2"><label class="form-label">address</label>
-<input class="form-control" name="address" th:value="${item.address}"/></div>
-<div class="mb-2"><label class="form-label">phone</label>
-<input class="form-control" name="phone" th:value="${item.phone}"/></div>
-<button class="btn btn-primary">Lưu</button>
-<a href="/patients" class="btn btn-secondary">Trở về</a>
-</form>
+
+<div class="container mt-4">
+    <h4 th:text="${patient.id == null ? 'Thêm bệnh nhân mới' : 'Sửa thông tin bệnh nhân'}"></h4>
+
+    <form th:action="@{/patients/save}" th:object="${patient}" method="post" class="bg-white p-3 rounded shadow-sm">
+
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-2">
+            <label class="form-label">Mã bệnh nhân</label>
+            <input class="form-control" th:field="*{code}" required />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Họ tên</label>
+            <input class="form-control" th:field="*{fullName}" required />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Địa chỉ</label>
+            <input class="form-control" th:field="*{address}" />
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label">Số điện thoại</label>
+            <input class="form-control" th:field="*{phone}" />
+        </div>
+
+        <button class="btn btn-primary">💾 Lưu</button>
+        <a href="/patients" class="btn btn-secondary">⬅ Trở về</a>
+    </form>
+</div>
+
 <th:block th:replace="_footer :: _"></th:block>
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

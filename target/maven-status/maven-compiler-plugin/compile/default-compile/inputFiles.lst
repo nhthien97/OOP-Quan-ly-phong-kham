@@ -17,5 +17,5 @@
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/PatientController.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Admission.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/AdmissionRepo.java
-/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/StaffRepo.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/PatientRepo.java
+/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/StaffRepo.java
