@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách bệnh nhân</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+  <meta charset="UTF-8">
+  <title>Danh sách bệnh nhân</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
-<body>
+<body class="bg-light">
 
-<th:block th:replace="_header :: _"></th:block>
+  <!-- ✅ Header -->
+  <th:block th:replace="~{_header :: _header}"></th:block>
 
-<div class="container mt-4">
-    <h4>Danh sách bệnh nhân</h4>
+  <div class="container mt-4">
 
-    <!-- 🔍 Form tìm kiếm -->
-    <form class="row mb-3" method="get" th:action="@{/patients}">
-        <div class="col-md-6">
-            <input type="text" name="keyword" class="form-control"
-                   placeholder="Nhập mã hoặc tên bệnh nhân..."
-                   th:value="${keyword}">
-        </div>
-        <div class="col-md-auto">
-            <button class="btn btn-primary" type="submit">🔍 Tìm kiếm</button>
-            <a class="btn btn-secondary" th:href="@{/patients}">🔄 Làm mới</a>
-        </div>
-    </form>
+    <!-- 🧭 Thanh tiêu đề + tìm kiếm -->
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+      <h3 class="text-primary mb-2">🧍 Danh sách bệnh nhân</h3>
 
-    <a class="btn btn-success mb-2" href="/patients/create">➕ Thêm bệnh nhân</a>
+      <form class="d-flex mb-2" th:action="@{/patients}" method="get">
+        <input class="form-control me-2" type="search" name="keyword"
+               th:value="${keyword}" placeholder="🔍 Tìm theo mã hoặc tên..." aria-label="Search">
+        <button class="btn btn-outline-primary" type="submit">Tìm</button>
+      </form>
 
-    <table class="table table-bordered table-hover bg-white">
-        <thead>
+      <div>
+        <a href="/patients/new" class="btn btn-success mb-2">➕ Thêm bệnh nhân</a>
+        <a href="/" class="btn btn-secondary mb-2">🏠 Trang chính</a>
+      </div>
+    </div>
+
+    <!-- 🧾 Bảng danh sách -->
+    <table class="table table-hover table-bordered bg-white shadow-sm">
+      <thead class="table-primary text-center">
         <tr>
-            <th>ID</th>
-            <th>Mã</th>
-            <th>Họ tên</th>
-            <th>Địa chỉ</th>
-            <th>Điện thoại</th>
-            <th>Hành động</th>
+          <th>Mã</th>
+          <th>Họ tên</th>
+          <th>Địa chỉ</th>
+          <th>Điện thoại</th>
+          <th>Thao tác</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         <tr th:each="p : ${patients}">
-            <td th:text="${p.id}">1</td>
-            <td th:text="${p.code}">BN001</td>
-            <td th:text="${p.fullName}">Nguyễn Văn A</td>
-            <td th:text="${p.address}">Hà Nội</td>
-            <td th:text="${p.phone}">0123456789</td>
-            <td>
-                <a class="btn btn-sm btn-primary" th:href="@{'/patients/edit/' + ${p.id}}">Sửa</a>
-                <a class="btn btn-sm btn-danger" th:href="@{'/patients/delete/' + ${p.id}}"
-                   onclick="return confirm('Bạn chắc chắn muốn xoá?')">Xoá</a>
-            </td>
+          <td th:text="${p.code}"></td>
+          <td th:text="${p.fullName}"></td>
+          <td th:text="${p.address}"></td>
+          <td th:text="${p.phone}"></td>
+          <td class="text-center">
+            <a th:href="@{/patients/edit/{id}(id=${p.id})}" class="btn btn-warning btn-sm">✏️ Sửa</a>
+            <a th:href="@{/patients/delete/{id}(id=${p.id})}" class="btn btn-danger btn-sm"
+               onclick="return confirm('Bạn có chắc muốn xóa bệnh nhân này không?');">🗑 Xóa</a>
+          </td>
         </tr>
-        </tbody>
+        <tr th:if="${#lists.isEmpty(patients)}">
+          <td colspan="5" class="text-center text-muted fst-italic">Không tìm thấy bệnh nhân nào.</td>
+        </tr>
+      </tbody>
     </table>
-</div>
+  </div>
 
-<th:block th:replace="_footer :: _"></th:block>
+  <!-- ✅ Footer -->
+  <th:block th:replace="~{_footer :: _footer}"></th:block>
 
-<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

@@ -2,16 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Phòng khám</title>
+  <title>Header</title>
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body>
-<div th:fragment="_">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Phòng khám</a>
-      <div class="collapse navbar-collapse show">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+<!-- ✅ Fragment Header -->
+<div th:fragment="_header">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">🏥 Phòng khám</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item"><a class="nav-link" href="/patients">Bệnh nhân</a></li>
           <li class="nav-item"><a class="nav-link" href="/staff">Bác sĩ & Nhân viên</a></li>
           <li class="nav-item"><a class="nav-link" href="/departments">Khoa/Phòng</a></li>
@@ -23,5 +29,7 @@
     </div>
   </nav>
 </div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

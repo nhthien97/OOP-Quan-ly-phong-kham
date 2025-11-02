@@ -1,38 +1,64 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Danh sách khoa phòng</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+  <meta charset="UTF-8">
+  <title>Danh sách Khoa / Phòng</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
-<body>
-<div class="container mt-4">
-    <h4>Danh sách Khoa Phòng</h4>
-    <a class="btn btn-success mb-2" href="/departments/new">➕ Thêm khoa</a>
+<body class="bg-light">
 
-    <table class="table table-bordered bg-white">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên khoa</th>
-            <th>Cơ sở</th>
-            <th>Hành động</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="it : ${items}">
-            <td th:text="${it.id}">1</td>
-            <td th:text="${it.name}">Nội</td>
-            <td th:text="${it.facility}">Cơ sở A</td>
-            <td>
-                <a class="btn btn-sm btn-primary" th:href="@{'/departments/' + ${it.id} + '/edit'}">Sửa</a>
-                <form th:action="@{'/departments/' + ${it.id} + '/delete'}" method="post" style="display:inline">
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa khoa này?')">Xóa</button>
-                </form>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<!-- ✅ Header -->
+<th:block th:replace="~{_header :: _header}"></th:block>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+    <h3 class="text-primary mb-2">🏢 Danh sách Khoa / Phòng</h3>
+
+    <!-- Form tìm kiếm -->
+    <form class="d-flex mb-2" th:action="@{/departments}" method="get">
+      <input class="form-control me-2" type="search" name="keyword"
+             th:value="${keyword}" placeholder="🔍 Tìm theo tên hoặc cơ sở...">
+      <button class="btn btn-outline-primary" type="submit">Tìm</button>
+    </form>
+
+    <div>
+      <a href="/departments/new" class="btn btn-success mb-2">➕ Thêm khoa</a>
+      <a href="/" class="btn btn-secondary mb-2">🏠 Trang chính</a>
+    </div>
+  </div>
+
+  <!-- Bảng danh sách -->
+  <table class="table table-hover table-bordered bg-white shadow-sm">
+    <thead class="table-primary text-center">
+    <tr>
+      <th>Mã</th>
+      <th>Tên khoa</th>
+      <th>Cơ sở</th>
+      <th>Thao tác</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dep : ${departments}">
+      <td th:text="${dep.id}"></td>
+      <td th:text="${dep.name}"></td>
+      <td th:text="${dep.facility}"></td>
+      <td class="text-center">
+        <a th:href="@{/departments/edit/{id}(id=${dep.id})}" class="btn btn-warning btn-sm">✏ Sửa</a>
+        <a th:href="@{/departments/delete/{id}(id=${dep.id})}"
+           class="btn btn-danger btn-sm"
+           onclick="return confirm('Bạn có chắc muốn xoá khoa này?');">🗑 Xóa</a>
+      </td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(departments)}">
+      <td colspan="4" class="text-center text-muted fst-italic">Không tìm thấy khoa nào.</td>
+    </tr>
+    </tbody>
+  </table>
 </div>
+
+<!-- ✅ Footer -->
+<th:block th:replace="~{_footer :: _footer}"></th:block>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

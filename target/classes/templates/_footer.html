@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Footer</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
 <body>
-<div th:fragment="_">
+
+<!-- ✅ Fragment Footer -->
+<div th:fragment="_footer">
   <footer class="bg-light text-center py-3 mt-5 border-top">
     <p class="mb-0 text-muted">© 2025 Phòng khám — Hệ thống quản lý OOP-QL-PK</p>
   </footer>
-
-  <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

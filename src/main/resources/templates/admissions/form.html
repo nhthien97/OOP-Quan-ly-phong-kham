@@ -1,17 +1,58 @@
-<th:block th:replace="_header :: _"></th:block>
-<h4>Nhận bệnh nhân vào phòng</h4>
-<form action="/admissions" method="post" class="bg-white p-3 rounded shadow-sm">
-<div class="mb-2">
-<label class="form-label">Bệnh nhân</label>
-<select class="form-select" name="patientCode">
-<option th:each="p: ${patients}" th:text="${p.fullName} + ' (' + ${p.code} + ')'" th:value="${p.code}"></option>
-</select></div>
-<div class="mb-2">
-<label class="form-label">Phòng</label>
-<select class="form-select" name="roomCode">
-<option th:each="r: ${rooms}" th:text="${r.code} + ' - ' + ${r.type} + ' (' + ${r.occupied} + '/' + ${r.capacity} + ')'" th:value="${r.code}"></option>
-</select></div>
-<button class="btn btn-primary">Nhận</button>
-<a href="/admissions" class="btn btn-secondary">Trở về</a>
-</form>
-<th:block th:replace="_footer :: _"></th:block>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm / Sửa nhận phòng</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<th:block th:replace="~{_header :: _header}"></th:block>
+
+<div class="container mt-4">
+  <h4 class="text-primary mb-3" th:text="${item.id == null ? '➕ Thêm nhận phòng' : '✏ Sửa thông tin nhận phòng'}"></h4>
+
+  <form th:action="${item.id != null} ? @{'/admissions/' + ${item.id}} : @{/admissions}"
+        method="post" th:object="${item}" class="bg-white p-4 rounded shadow-sm border">
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Bệnh nhân</label>
+      <select class="form-select" name="patient.id" required>
+        <option value="">-- Chọn bệnh nhân --</option>
+        <option th:each="p : ${patients}" th:value="${p.id}"
+                th:selected="${item.patient != null and p.id == item.patient.id}"
+                th:text="${p.fullName}"></option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Phòng</label>
+      <select class="form-select" name="room.id" required>
+        <option value="">-- Chọn phòng --</option>
+        <option th:each="r : ${rooms}" th:value="${r.id}"
+                th:selected="${item.room != null and r.id == item.room.id}"
+                th:text="${r.code}"></option>
+      </select>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Giờ vào</label>
+        <input class="form-control" type="datetime-local" th:field="*{checkIn}">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Giờ ra</label>
+        <input class="form-control" type="datetime-local" th:field="*{checkOut}">
+      </div>
+    </div>
+
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">💾 Lưu</button>
+      <a href="/admissions" class="btn btn-secondary">⬅ Trở lại</a>
+    </div>
+  </form>
+</div>
+
+<th:block th:replace="~{_footer :: _footer}"></th:block>
+</body>
+</html>

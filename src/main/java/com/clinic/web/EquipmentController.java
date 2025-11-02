@@ -1,8 +1,8 @@
-
 package com.clinic.web;
 
-import com.clinic.domain.*;
-import com.clinic.repo.*;
+import com.clinic.domain.Equipment;
+import com.clinic.repo.EquipmentRepo;
+import com.clinic.repo.RoomRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +12,54 @@ import org.springframework.web.bind.annotation.*;
 public class EquipmentController {
     private final EquipmentRepo repo;
     private final RoomRepo roomRepo;
-    public EquipmentController(EquipmentRepo repo, RoomRepo roomRepo){this.repo=repo; this.roomRepo=roomRepo;}
 
-    @GetMapping public String list(Model m){ m.addAttribute("items", repo.findAll()); return "equipment/list";}
-    @GetMapping("/new") public String form(Model m){ m.addAttribute("item", new Equipment()); m.addAttribute("rooms", roomRepo.findAll()); return "equipment/form";}
-    @PostMapping public String create(Equipment e){ repo.save(e); return "redirect:/equipment";}
-    @GetMapping("/{id}/edit") public String edit(@PathVariable Long id, Model m){ m.addAttribute("item", repo.findById(id).orElseThrow()); m.addAttribute("rooms", roomRepo.findAll()); return "equipment/form";}
-    @PostMapping("/{id}") public String update(@PathVariable Long id, Equipment e){ e.setId(id); repo.save(e); return "redirect:/equipment";}
-    @PostMapping("/{id}/delete") public String delete(@PathVariable Long id){ repo.deleteById(id); return "redirect:/equipment";}
+    public EquipmentController(EquipmentRepo repo, RoomRepo roomRepo) {
+        this.repo = repo;
+        this.roomRepo = roomRepo;
+    }
+
+    // ✅ Danh sách + tìm kiếm
+    @GetMapping
+    public String list(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.isEmpty()) {
+            model.addAttribute("items", repo.findByCodeContainingIgnoreCaseOrNameContainingIgnoreCase(keyword, keyword));
+        } else {
+            model.addAttribute("items", repo.findAll());
+        }
+        model.addAttribute("keyword", keyword);
+        return "equipment/list";
+    }
+
+    // ✅ Form thêm mới
+    @GetMapping("/new")
+    public String form(Model model) {
+        model.addAttribute("item", new Equipment());
+        model.addAttribute("rooms", roomRepo.findAll());
+        return "equipment/form";
+    }
+
+    // ✅ Lưu (thêm/sửa)
+    @PostMapping
+    public String save(@ModelAttribute Equipment e, @RequestParam(value = "room.id", required = false) Long roomId) {
+        if (roomId != null) {
+            e.setRoom(roomRepo.findById(roomId).orElse(null));
+        }
+        repo.save(e);
+        return "redirect:/equipment";
+    }
+
+    // ✅ Form sửa
+    @GetMapping("/{id}/edit")
+    public String edit(@PathVariable Long id, Model model) {
+        model.addAttribute("item", repo.findById(id).orElseThrow());
+        model.addAttribute("rooms", roomRepo.findAll());
+        return "equipment/form";
+    }
+
+    // ✅ Xóa
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        repo.deleteById(id);
+        return "redirect:/equipment";
+    }
 }

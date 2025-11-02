@@ -10,53 +10,51 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/patients")
 public class PatientController {
 
-    private final PatientRepo repo;
+    private final PatientRepo patientRepo;
 
-    public PatientController(PatientRepo repo) {
-        this.repo = repo;
+    public PatientController(PatientRepo patientRepo) {
+        this.patientRepo = patientRepo;
     }
 
-    // 🟢 1. HIỂN THỊ DANH SÁCH + TÌM KIẾM
+    // 🧾 Danh sách bệnh nhân (có tìm kiếm)
     @GetMapping
-    public String list(@RequestParam(name = "keyword", required = false) String keyword, Model model) {
-        if (keyword != null && !keyword.isBlank()) {
+    public String list(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
             model.addAttribute("patients",
-                    repo.findByFullNameContainingIgnoreCaseOrCodeContainingIgnoreCase(keyword, keyword));
+                    patientRepo.findByFullNameContainingIgnoreCaseOrCodeContainingIgnoreCase(keyword, keyword));
+            model.addAttribute("keyword", keyword);
         } else {
-            model.addAttribute("patients", repo.findAll());
+            model.addAttribute("patients", patientRepo.findAll());
+            model.addAttribute("keyword", "");
         }
-
-        model.addAttribute("keyword", keyword);
         return "patients/list";
     }
 
-    // 🟢 2. FORM THÊM MỚI
-    @GetMapping("/create")
+    // ➕ Thêm bệnh nhân mới
+    @GetMapping("/new")
     public String createForm(Model model) {
         model.addAttribute("patient", new Patient());
         return "patients/form";
     }
 
-    // 🟢 3. FORM CHỈNH SỬA
-    @GetMapping("/edit/{id}")
-    public String editForm(@PathVariable Long id, Model model) {
-        Patient patient = repo.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Không tìm thấy bệnh nhân ID: " + id));
-        model.addAttribute("patient", patient);
-        return "patients/form";
-    }
-
-    // 🟢 4. LƯU (THÊM / CẬP NHẬT)
+    // 💾 Lưu (thêm hoặc sửa)
     @PostMapping("/save")
     public String save(@ModelAttribute Patient patient) {
-        repo.save(patient);
+        patientRepo.save(patient);
         return "redirect:/patients";
     }
 
-    // 🟢 5. XOÁ
+    // ✏️ Sửa thông tin
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("patient", patientRepo.findById(id).orElseThrow());
+        return "patients/form";
+    }
+
+    // 🗑️ Xóa bệnh nhân
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable Long id) {
-        repo.deleteById(id);
+        patientRepo.deleteById(id);
         return "redirect:/patients";
     }
 }

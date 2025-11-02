@@ -7,19 +7,21 @@ import lombok.*;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor @Builder
 public class Staff {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String code; // Mã nhân viên
 
     @Column(nullable = false)
-    private String fullName;
+    private String fullName; // Họ tên
 
-    private String role;    // Ví dụ: Bác sĩ, Y tá
-    private String phone;
-    private String idCard;
+    private String role;     // Chức vụ
+    private String phone;    // Điện thoại
+    private String idCard;   // CMND/CCCD
 
     @ManyToOne
-    private Department department;
+    private Department department; // Khoa
 }

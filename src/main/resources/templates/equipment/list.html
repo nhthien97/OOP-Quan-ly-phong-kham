@@ -1,20 +1,70 @@
-<th:block th:replace="_header :: _"></th:block>
-<h4>Danh sách equipment</h4>
-<a class="btn btn-success mb-2" href="/equipment/new">Thêm</a>
-<table class="table table-bordered bg-white">
-  <thead><tr><th>ID</th><th>code</th><th>name</th><th>status</th><th>Hành động</th></tr></thead><tbody>
-<tr th:each="it: ${items}">
-  <td th:text="${it.id}"></td>
-  <td th:text="${it.code}"></td>
-  <td th:text="${it.name}"></td>
-  <td th:text="${it.status}"></td>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách Thiết bị</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
 
-  <td>
-    <a class="btn btn-sm btn-primary" th:href="@('/equipment/' + ${it.id} + '/edit')">Sửa</a>
-    <form th:action="@('/equipment/' + ${it.id} + '/delete')" method="post" style="display:inline">
-      <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa?')">Xóa</button>
+<!-- ✅ Header chung -->
+<th:block th:replace="~{_header :: _header}"></th:block>
+
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+    <h3 class="text-primary mb-2">🔧 Danh sách Thiết bị</h3>
+
+    <!-- Form tìm kiếm -->
+    <form class="d-flex mb-2" th:action="@{/equipment}" method="get">
+      <input class="form-control me-2" type="search" name="keyword"
+             th:value="${keyword}" placeholder="🔍 Tìm theo mã hoặc tên thiết bị...">
+      <button class="btn btn-outline-primary" type="submit">Tìm</button>
     </form>
-  </td>
-</tr>
-</tbody></table>
-<th:block th:replace="_footer :: _"></th:block>
+
+    <div>
+      <a href="/equipment/new" class="btn btn-success mb-2">➕ Thêm thiết bị</a>
+      <a href="/" class="btn btn-secondary mb-2">🏠 Trang chính</a>
+    </div>
+  </div>
+
+  <!-- Bảng danh sách -->
+  <table class="table table-bordered table-hover bg-white shadow-sm">
+    <thead class="table-primary text-center">
+    <tr>
+      <th>ID</th>
+      <th>Mã</th>
+      <th>Tên thiết bị</th>
+      <th>Trạng thái</th>
+      <th>Phòng</th>
+      <th>Hành động</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="it : ${items}">
+      <td th:text="${it.id}"></td>
+      <td th:text="${it.code}"></td>
+      <td th:text="${it.name}"></td>
+      <td th:text="${it.status}"></td>
+      <td th:text="${it.room != null ? it.room.code : 'Chưa gán phòng'}"></td>
+      <td class="text-center">
+        <a class="btn btn-sm btn-warning" th:href="@{'/equipment/' + ${it.id} + '/edit'}">✏ Sửa</a>
+        <form th:action="@{'/equipment/' + ${it.id} + '/delete'}" method="post" style="display:inline">
+          <button class="btn btn-sm btn-danger" onclick="return confirm('Xóa thiết bị này?')">🗑 Xóa</button>
+        </form>
+      </td>
+    </tr>
+
+    <!-- Khi không có dữ liệu -->
+    <tr th:if="${#lists.isEmpty(items)}">
+      <td colspan="6" class="text-center text-muted fst-italic">Không có thiết bị nào.</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ✅ Footer chung -->
+<th:block th:replace="~{_footer :: _footer}"></th:block>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

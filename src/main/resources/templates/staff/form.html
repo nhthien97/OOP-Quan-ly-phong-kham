@@ -1,63 +1,67 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Thêm / Sửa nhân viên</title>
     <meta charset="UTF-8">
+    <title>Thêm / Sửa Nhân viên</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
 </head>
-<body>
-<div class="container mt-4">
-    <h4>Thêm / Sửa nhân viên</h4>
+<body class="bg-light">
 
-    <form method="post" th:action="@{/staff}" th:object="${item}" class="bg-white p-3 rounded shadow-sm">
+<th:block th:replace="~{_header :: _header}"></th:block>
+
+<div class="container mt-4">
+    <h4 class="text-primary mb-3"
+        th:text="${staff.id == null ? '➕ Thêm nhân viên mới' : '✏ Sửa thông tin nhân viên'}"></h4>
+
+    <form th:action="@{/staff/save}" th:object="${staff}" method="post"
+          class="bg-white p-4 rounded shadow-sm border">
         <input type="hidden" th:field="*{id}"/>
 
-        <!-- Mã -->
-        <div class="mb-2">
-            <label class="form-label">Mã</label>
-            <input class="form-control" th:field="*{code}" required>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Mã nhân viên</label>
+            <input type="text" class="form-control" th:field="*{code}" required>
         </div>
 
-        <!-- Họ tên -->
-        <div class="mb-2">
-            <label class="form-label">Họ tên</label>
-            <input class="form-control" th:field="*{fullName}" required>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Họ và tên</label>
+            <input type="text" class="form-control" th:field="*{fullName}" required>
         </div>
 
-        <!-- Chức vụ -->
-        <div class="mb-2">
-            <label class="form-label">Chức vụ</label>
-            <input class="form-control" th:field="*{role}">
+        <div class="mb-3">
+            <label class="form-label fw-bold">Chức vụ</label>
+            <input type="text" class="form-control" th:field="*{role}">
         </div>
 
-        <!-- SĐT -->
-        <div class="mb-2">
-            <label class="form-label">Điện thoại</label>
-            <input class="form-control" th:field="*{phone}">
+        <div class="mb-3">
+            <label class="form-label fw-bold">Số điện thoại</label>
+            <input type="text" class="form-control" th:field="*{phone}">
         </div>
 
-        <!-- CMND/CCCD -->
-        <div class="mb-2">
-            <label class="form-label">CMND/CCCD</label>
-            <input class="form-control" th:field="*{idCard}">
+        <div class="mb-3">
+            <label class="form-label fw-bold">CMND/CCCD</label>
+            <input type="text" class="form-control" th:field="*{idCard}">
         </div>
 
-        <!-- Khoa -->
-        <div class="mb-2">
-            <label class="form-label">Khoa</label>
-            <select class="form-select" name="department" required>
+        <div class="mb-3">
+            <label class="form-label fw-bold">Khoa</label>
+            <select class="form-select" name="department">
                 <option value="">-- Chọn khoa --</option>
                 <option th:each="dep : ${departments}"
                         th:value="${dep.id}"
-                        th:selected="${item.department != null and dep.id == item.department.id}"
-                        th:text="${dep.name}">
-                </option>
+                        th:selected="${staff.department != null and dep.id == staff.department.id}"
+                        th:text="${dep.name}"></option>
             </select>
         </div>
 
-        <button class="btn btn-primary">Lưu</button>
-        <a class="btn btn-secondary" href="/staff">Quay lại</a>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">💾 Lưu</button>
+            <a href="/staff" class="btn btn-secondary">⬅ Quay lại</a>
+        </div>
     </form>
 </div>
+
+<th:block th:replace="~{_footer :: _footer}"></th:block>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

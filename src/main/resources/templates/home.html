@@ -2,23 +2,121 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
-  <title>OOP-Ql-PK</title>
-  <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+  <title>Trang chủ - Quản lý phòng khám</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
+  <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+
+  <style>
+    .menu-card {
+      transition: 0.3s ease;
+    }
+    .menu-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,0,0,0.15);
+    }
+  </style>
 </head>
 <body class="bg-light">
 
-  <th:block th:replace="_header :: _"></th:block>
+  <!-- Header -->
+  <th:block th:replace="~{_header :: _header}"></th:block>
 
-  <div class="container py-4">
-    <div class="card shadow">
-      <div class="card-body">
-        <h3 class="card-title">Hệ thống quản lý phòng khám</h3>
-        <p>Menu hỗ trợ CRUD và chức năng chính: nhận bệnh nhân vào phòng/giường, theo dõi sử dụng.</p>
+  <!-- Banner -->
+  <div id="clinicCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active text-center bg-primary text-white py-5">
+        <h2 class="fw-bold">Hệ thống quản lý phòng khám</h2>
+        <p>Quản lý toàn diện bệnh nhân, nhân viên, thiết bị và nhận phòng.</p>
       </div>
+      <div class="carousel-item text-center bg-info text-dark py-5">
+        <h2 class="fw-bold">Tối ưu hóa vận hành</h2>
+        <p>Giúp các khoa và nhân viên phối hợp hiệu quả hơn.</p>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#clinicCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#clinicCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Menu -->
+  <div class="container my-5">
+    <div class="row g-4">
+
+      <!-- Bệnh nhân -->
+      <div class="col-md-4">
+        <a href="/patients" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-primary border-2">
+            <i class="bi bi-person-lines-fill display-5 text-primary mb-3"></i>
+            <h4 class="fw-bold text-primary">Bệnh nhân</h4>
+            <p>Quản lý hồ sơ và thông tin điều trị.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Bác sĩ & Nhân viên -->
+      <div class="col-md-4">
+        <a href="/staff" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-success border-2">
+            <i class="bi bi-people-fill display-5 text-success mb-3"></i>
+            <h4 class="fw-bold text-success">Bác sĩ & Nhân viên</h4>
+            <p>Quản lý thông tin nhân sự và phân công.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Khoa / Phòng -->
+      <div class="col-md-4">
+        <a href="/departments" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-warning border-2">
+            <i class="bi bi-building display-5 text-warning mb-3"></i>
+            <h4 class="fw-bold text-warning">Khoa / Phòng</h4>
+            <p>Quản lý cơ cấu tổ chức và phòng ban.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Phòng / Giường -->
+      <div class="col-md-4">
+        <a href="/rooms" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-info border-2">
+            <i class="bi bi-door-open-fill display-5 text-info mb-3"></i>
+            <h4 class="fw-bold text-info">Phòng / Giường</h4>
+            <p>Quản lý giường bệnh và trạng thái sử dụng.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Thiết bị -->
+      <div class="col-md-4">
+        <a href="/equipment" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-danger border-2">
+            <i class="bi bi-gear-fill display-5 text-danger mb-3"></i>
+            <h4 class="fw-bold text-danger">Thiết bị</h4>
+            <p>Theo dõi, bảo trì và tình trạng thiết bị.</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- Nhận phòng -->
+      <div class="col-md-4">
+        <a href="/admissions" class="text-decoration-none text-dark">
+          <div class="card menu-card text-center p-4 border-secondary border-2">
+            <i class="bi bi-hospital-fill display-5 text-secondary mb-3"></i>
+            <h4 class="fw-bold text-secondary">Nhận phòng</h4>
+            <p>Tiếp nhận bệnh nhân vào phòng, phân giường.</p>
+          </div>
+        </a>
+      </div>
+
     </div>
   </div>
 
-  <th:block th:replace="_footer :: _"></th:block>
+  <!-- Footer -->
+  <th:block th:replace="~{_footer :: _footer}"></th:block>
 
 </body>
 </html>

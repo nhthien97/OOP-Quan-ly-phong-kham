@@ -1,46 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="_header :: _"></th:block>
-<body>
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm / Sửa Phòng / Giường</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<th:block th:replace="~{_header :: _header}"></th:block>
+
 <div class="container mt-4">
-    <h4>Thêm / Sửa Phòng</h4>
+  <h4 class="text-primary mb-3"
+      th:text="${room.id == null ? '➕ Thêm phòng mới' : '✏ Sửa thông tin phòng'}"></h4>
 
-    <form th:action="${item.id != null} ? @{'/rooms/' + ${item.id}} : @{/rooms}" method="post" th:object="${item}" class="bg-white p-3 rounded shadow-sm">
-        <input type="hidden" th:field="*{id}"/>
+  <form th:action="@{/rooms/save}" th:object="${room}" method="post"
+        class="bg-white p-4 rounded shadow-sm border">
+    <input type="hidden" th:field="*{id}"/>
 
-        <div class="mb-2">
-            <label class="form-label">Mã phòng</label>
-            <input class="form-control" th:field="*{code}" required>
-        </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Mã phòng</label>
+        <input type="text" class="form-control" th:field="*{code}" required>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Loại phòng</label>
+        <input type="text" class="form-control" th:field="*{type}">
+      </div>
+    </div>
 
-        <div class="mb-2">
-            <label class="form-label">Loại phòng</label>
-            <input class="form-control" th:field="*{type}">
-        </div>
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Sức chứa</label>
+        <input type="number" class="form-control" th:field="*{capacity}">
+      </div>
+      <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">Số đã sử dụng</label>
+        <input type="number" class="form-control" th:field="*{occupied}">
+      </div>
+    </div>
 
-        <div class="mb-2">
-            <label class="form-label">Sức chứa</label>
-            <input class="form-control" th:field="*{capacity}">
-        </div>
+    <div class="mb-3">
+      <label class="form-label fw-bold">Khoa phụ trách</label>
+      <select class="form-select" name="department.id" required>
+        <option value="">-- Chọn khoa --</option>
+        <option th:each="d : ${departments}"
+                th:value="${d.id}"
+                th:selected="${room.department != null and d.id == room.department.id}"
+                th:text="${d.name}"></option>
+      </select>
+    </div>
 
-        <div class="mb-2">
-            <label class="form-label">Số đã sử dụng</label>
-            <input class="form-control" th:field="*{occupied}">
-        </div>
-
-        <div class="mb-2">
-            <label class="form-label">Khoa</label>
-            <select class="form-select" name="department.id">
-                <option th:each="d : ${departments}" th:value="${d.id}"
-                        th:selected="${item.department != null and d.id == item.department.id}"
-                        th:text="${d.name}">Khoa</option>
-            </select>
-        </div>
-
-        <button class="btn btn-primary">Lưu</button>
-        <a href="/rooms" class="btn btn-secondary">Trở lại</a>
-    </form>
+    <div class="d-flex gap-2">
+      <button type="submit" class="btn btn-primary">💾 Lưu</button>
+      <a href="/rooms" class="btn btn-secondary">⬅ Quay lại</a>
+    </div>
+  </form>
 </div>
-<th:block th:replace="_footer :: _"></th:block>
+
+<th:block th:replace="~{_footer :: _footer}"></th:block>
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
