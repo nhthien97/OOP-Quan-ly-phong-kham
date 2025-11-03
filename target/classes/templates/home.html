@@ -15,6 +15,30 @@
       transform: scale(1.05);
       box-shadow: 0 0 20px rgba(0,0,0,0.15);
     }
+
+    /* ✅ Style cho slide ảnh */
+    .carousel-background {
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* lớp phủ mờ */
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
   </style>
 </head>
 <body class="bg-light">
@@ -22,18 +46,33 @@
   <!-- Header -->
   <th:block th:replace="~{_header :: _header}"></th:block>
 
-  <!-- Banner -->
+  <!-- ✅ Banner với ảnh nền -->
   <div id="clinicCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <div class="carousel-item active text-center bg-primary text-white py-5">
-        <h2 class="fw-bold">Hệ thống quản lý phòng khám</h2>
-        <p>Quản lý toàn diện bệnh nhân, nhân viên, thiết bị và nhận phòng.</p>
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="carousel-background" style="background-image: url('/images/cho1.jpg');">
+          <div class="overlay">
+            <h2 class="fw-bold">Hệ thống quản lý phòng khám</h2>
+            <p>Quản lý toàn diện bệnh nhân, nhân viên, thiết bị và nhận phòng.</p>
+          </div>
+        </div>
       </div>
-      <div class="carousel-item text-center bg-info text-dark py-5">
-        <h2 class="fw-bold">Tối ưu hóa vận hành</h2>
-        <p>Giúp các khoa và nhân viên phối hợp hiệu quả hơn.</p>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="carousel-background" style="background-image: url('/images/cho2.jpg');">
+          <div class="overlay">
+            <h2 class="fw-bold">Tối ưu hóa vận hành</h2>
+            <p>Giúp các khoa và nhân viên phối hợp hiệu quả hơn.</p>
+          </div>
+        </div>
       </div>
+
     </div>
+
+    <!-- Nút điều hướng -->
     <button class="carousel-control-prev" type="button" data-bs-target="#clinicCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon"></span>
     </button>

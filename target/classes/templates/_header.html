@@ -16,20 +16,46 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <!-- Menu mặc định -->
           <li class="nav-item"><a class="nav-link" href="/patients">Bệnh nhân</a></li>
           <li class="nav-item"><a class="nav-link" href="/staff">Bác sĩ & Nhân viên</a></li>
           <li class="nav-item"><a class="nav-link" href="/departments">Khoa/Phòng</a></li>
           <li class="nav-item"><a class="nav-link" href="/rooms">Phòng/Giường</a></li>
           <li class="nav-item"><a class="nav-link" href="/equipment">Thiết bị</a></li>
           <li class="nav-item"><a class="nav-link" href="/admissions">Nhận phòng</a></li>
+
+          <!-- 👤 Hiển thị tên người dùng -->
+          <li class="nav-item d-flex align-items-center text-white px-2"
+              th:if="${#authentication != null and #authentication.authenticated}">
+            <span class="navbar-text">
+              Xin chào, <strong th:text="${#authentication.name}">user</strong>
+            </span>
+          </li>
+
+          <!-- 🔓 Nút Đăng xuất -->
+          <li class="nav-item" th:if="${#authentication != null and #authentication.authenticated}">
+            <form th:action="@{/logout}" method="post" class="d-inline">
+              <button type="submit" class="btn btn-link nav-link" style="padding: 0;">
+                <i class="bi bi-box-arrow-right"></i> Đăng xuất
+              </button>
+            </form>
+          </li>
+
+          <!-- 🔑 Nút Đăng nhập -->
+          <li class="nav-item" th:if="${#authentication == null or !#authentication.authenticated}">
+            <a class="nav-link" th:href="@{/login}">
+              <i class="bi bi-box-arrow-in-right"></i> Đăng nhập
+            </a>
+          </li>
+
         </ul>
       </div>
     </div>
   </nav>
 </div>
 
-<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

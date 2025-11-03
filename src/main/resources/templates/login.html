@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng nhập - Phòng khám</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}">
+
+  <style>
+    /* Ảnh nền và lớp phủ */
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: url('/images/benhvien-phenikaa.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    /* 🟦 Lớp phủ mờ */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* chỉnh độ mờ ở đây */
+      z-index: 0;
+    }
+
+    .login-container {
+      position: relative;
+      z-index: 1; /* đảm bảo form hiển thị trên lớp mờ */
+      width: 100%;
+      max-width: 450px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    .login-header img {
+      width: 100%;
+      height: auto;
+    }
+
+    .login-form {
+      padding: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+
+  <!-- 🔵 Banner đầu form -->
+  <div class="login-header">
+    <img th:src="@{/images/banner-login.png}" alt="Banner đăng nhập">
+  </div>
+
+  <!-- 🔐 Form đăng nhập -->
+  <div class="login-form">
+    <h4 class="text-center mb-4 text-primary">Đăng nhập</h4>
+
+    <form th:action="@{/login}" method="post">
+      <div th:if="${param.error}" class="alert alert-danger">
+        Sai tên đăng nhập hoặc mật khẩu.
+      </div>
+      <div th:if="${param.logout}" class="alert alert-success">
+        Bạn đã đăng xuất thành công.
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Tên đăng nhập</label>
+        <input type="text" name="username" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+      </div>
+    </form>
+
+    <div class="text-center mt-3 text-muted">
+      Tài khoản mặc định: <strong>admin</strong> / <strong>admin</strong>
+    </div>
+  </div>
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

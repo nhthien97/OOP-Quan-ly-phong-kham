@@ -4,7 +4,6 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- ====== Thông tin dự án ====== -->
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.clinic</groupId>
     <artifactId>oop-ql-pk</artifactId>
@@ -14,57 +13,60 @@
     <name>OOP Quan Ly Phong Kham</name>
     <description>Ứng dụng quản lý phòng khám Spring Boot + H2 + Thymeleaf</description>
 
-    <!-- ====== Khai báo cha là Spring Boot ====== -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.4</version>
-        <relativePath/> <!-- đảm bảo Maven tìm được -->
+        <relativePath/>
     </parent>
 
-    <!-- ====== Cấu hình chung ====== -->
     <properties>
         <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
-    <!-- ====== Dependencies ====== -->
     <dependencies>
 
-        <!-- 🌐 Web: tạo REST API và Controller -->
+        <!-- 🌐 Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 🎨 Thymeleaf Template Engine -->
+        <!-- 🎨 Thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- 🗄️ JPA + Hibernate ORM -->
+        <!-- 🗄️ JPA / Hibernate -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- 🧠 H2 Database (In-Memory DB) -->
+        <!-- 🧠 H2 In-Memory DB -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- 💡 Lombok (giảm code getter/setter) -->
+        <!-- 🔐 Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- 💡 Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- 🎨 WebJars: Bootstrap & Font Awesome -->
+        <!-- 🎨 WebJars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
@@ -77,7 +79,7 @@
             <version>6.5.1</version>
         </dependency>
 
-        <!-- ⚙️ DevTools: tự reload khi sửa code -->
+        <!-- ⚙️ DevTools -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -93,7 +95,6 @@
 
     </dependencies>
 
-    <!-- ====== Build Config ====== -->
     <build>
         <plugins>
 
@@ -103,7 +104,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- ⚙️ Compiler Plugin cho Java 17 -->
+            <!-- ⚙️ Java 17 Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
