@@ -2,6 +2,7 @@
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/AdmissionController.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/config/SecurityConfig.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/RoomController.java
+/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/exception/GlobalExceptionHandler.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Staff.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/ClinicApp.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/EquipmentRepo.java

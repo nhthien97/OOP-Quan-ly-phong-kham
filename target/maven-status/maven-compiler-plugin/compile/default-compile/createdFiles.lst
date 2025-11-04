@@ -1,5 +1,6 @@
 com/clinic/domain/Department.class
 com/clinic/ClinicApp.class
+com/clinic/exception/GlobalExceptionHandler.class
 com/clinic/domain/Staff.class
 com/clinic/web/EquipmentController.class
 com/clinic/domain/Patient$PatientBuilder.class
