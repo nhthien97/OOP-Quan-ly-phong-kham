@@ -7,14 +7,14 @@
 </head>
 <body class="bg-light">
 
-<!-- ✅ Header chung -->
+<!-- ✅ Header -->
 <th:block th:replace="~{_header :: _header}"></th:block>
 
 <div class="container mt-4">
   <h4 class="text-primary mb-3" th:text="${item.id == null ? '➕ Thêm thiết bị mới' : '✏ Cập nhật thiết bị'}"></h4>
 
-  <form th:action="${item.id != null} ? @{'/equipment/' + ${item.id}} : @{/equipment}"
-        method="post" th:object="${item}"
+  <!-- ✅ ✅ ĐÂY LÀ FORM ĐÃ SỬA -->
+  <form th:action="@{/equipment}" method="post" th:object="${item}"
         class="bg-white p-4 rounded shadow-sm border">
 
     <div class="row">
@@ -57,7 +57,7 @@
   </form>
 </div>
 
-<!-- ✅ Footer chung -->
+<!-- ✅ Footer -->
 <th:block th:replace="~{_footer :: _footer}"></th:block>
 
 <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
