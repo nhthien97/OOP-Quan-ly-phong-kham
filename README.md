@@ -364,7 +364,7 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 
 ---
 
-## 5. Triển Khai
+##  Triển Khai
 - Link Github Source Code: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6.github.dev/
 - Link Youtube demo ứng dụng: 
 - Link trang web chính thức: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/
