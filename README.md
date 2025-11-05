@@ -113,7 +113,8 @@
 - `calculateStayDuration()
 
 ## 3. Sơ đồ hệ thống
-
+**Hình: Sơ đồ hoạt động project**
+![Project](src/docs/img/project.png)
 ### 3.1 Sơ đồ khối tổng thể hệ thống
 
 Hệ thống được tổ chức theo các nhóm chức năng chính:
