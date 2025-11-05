@@ -1,98 +1,113 @@
-# OOP-Ql-PK – Quản lý phòng khám
+# OOP-QL-PK – Quản lý phòng khám
 
-## Công nghệ
-• Ngôn ngữ lập trình: Java 17 (jdk 17.0.17-amzn)  
-• Framework: Spring Boot 3  
-• Spring Web – xử lý HTTP requests theo mô hình MVC  
-• Spring Data JPA – ORM, thao tác cơ sở dữ liệu  
-• Spring Security – cấu hình đăng nhập, bảo vệ tài nguyên  
-• Thymeleaf – hiển thị giao diện HTML động  
-• Cơ sở dữ liệu: H2 Database (in-memory, dùng cho phát triển)  
-• Build tool: Apache Maven  
-• Kiểm thử: JUnit 5  
-• Thiết kế UML: PlantUML (*.puml files)  
-• Template engine: Thymeleaf  
-• MVC: Controller (web), Service (business), Repository (data), Domain (model)  
+---
 
-## Chạy dự án
-• Cấu hình `src/main/resources/application.properties` với thông tin MySQL (Aiven)  
-• Chạy lệnh: `mvn spring-boot:run`  
-• Mở trình duyệt tại: `http://localhost:8080/`  
+## 1. Giới thiệu chung
 
-## Đối tượng chính
-Các entity đại diện cho các đối tượng quản lý trong hệ thống:
+### 1.1 Thành viên dự án
+- Nguyễn Hoàng Thiên *(người đóng góp chính – ví dụ từ metadata VSCode)*
+- Các thành viên khác có thể bổ sung vào đây nếu có
 
-| Entity     | Mô tả                              |
-|------------|-------------------------------------|
-| Patient    | Thông tin bệnh nhân                 |
-| Staff      | Nhân viên (bác sĩ, y tá, v.v.)      |
-| Room       | Phòng bệnh                          |
-| Department | Khoa phòng                          |
-| Equipment  | Thiết bị y tế                       |
-| Admission  | Hồ sơ nhập viện của bệnh nhân       |
+### 1.2 Yêu cầu chính
+- Xây dựng một hệ thống quản lý phòng khám theo kiến trúc **Spring Boot MVC**
+- Hỗ trợ chức năng **CRUD đầy đủ** cho các thực thể: Bệnh nhân, Nhân viên, Phòng, Khoa, Thiết bị, Nhập viện
+- Giao diện web dễ sử dụng (sử dụng Thymeleaf + Bootstrap)
+- Xử lý lỗi toàn cục và kiểm thử nghiệp vụ
+- Vẽ sơ đồ UML cho kiến trúc và các luồng xử lý chính
 
-## Chức năng CRUD
-• Chức năng chính: `/admissions` – nhận bệnh nhân vào phòng/giường, theo dõi sử dụng  
-• Mỗi entity đều có đầy đủ chức năng Create - Read - Update - Delete thông qua:  
-  • Controller: xử lý yêu cầu từ người dùng (web layer)  
-  • Service: xử lý nghiệp vụ  
-  • Repository: truy xuất dữ liệu với JPA  
-  • Giao diện Thymeleaf: các form và danh sách hiển thị  
+### 1.3 Mô tả cụ thể
+- Ngôn ngữ: Java 17 (jdk 17.0.17-amzn)
+- Framework: Spring Boot 3
+- ORM: Spring Data JPA
+- UI: Thymeleaf, Bootstrap
+- Bảo mật: Spring Security
+- Cơ sở dữ liệu: H2 (dev), MySQL (production - cấu hình thủ công)
+- UML: PlantUML
+- Kiểm thử: JUnit 5
+- Build tool: Maven
 
-| Đối tượng   | Chức năng |
-|-------------|-----------|
-| Bệnh nhân   | CRUD      |
-| Nhân viên   | CRUD      |
-| Phòng       | CRUD      |
-| Khoa phòng  | CRUD      |
-| Thiết bị    | CRUD      |
-| Nhập viện   | CRUD      |
+---
 
-## Kiểm thử
-• `AdmissionServiceTest` mô phỏng nhận & trả phòng, đảm bảo cập nhật số chỗ (occupied)  
-• Sử dụng JUnit 5  
-• Kiểm thử đơn vị (unit test) cho lớp `AdmissionService`  
+## 2. Object (Đối tượng chính)
 
-## Bắt & xử lý lỗi
-• Sử dụng `@ControllerAdvice` và `@ExceptionHandler` để xử lý lỗi toàn cục  
-• Lỗi được hiển thị qua giao diện tùy chỉnh `templates/error/general.html`  
-• Hiển thị thông báo lỗi thân thiện với người dùng bằng Thymeleaf  
-• Khi xảy ra lỗi (ví dụ: RuntimeException, lỗi hệ thống), người dùng được chuyển đến trang thông báo lỗi  
+### 2.1 Patient (Bệnh nhân)
+#### 2.1.1 Attribute (Thuộc tính)
+- `id`: Long – mã định danh
+- `fullName`: String – họ tên
+- `dateOfBirth`: LocalDate – ngày sinh
+- `gender`: String – giới tính
+- `address`: String – địa chỉ
+- `phone`: String – số điện thoại
 
-### Cấu trúc xử lý lỗi:
-• `GlobalExceptionHandler.java`: xử lý lỗi toàn cục  
-• Template hiển thị lỗi: `general.html`  
+#### 2.1.2 Methods (Phương thức)
+- `getters / setters`
+- `toString()`
+- `equals()` / `hashCode()`
 
-### Test lỗi mẫu:
-• Truy cập `/test-error` (nếu bật lại route test) sẽ ném lỗi và kích hoạt cơ chế xử lý  
-• Người dùng thấy thông báo lỗi thay vì stack trace kỹ thuật  
+---
 
-## UML
-• Xem thư mục `docs/uml` gồm:  
-  • 01 Structural: `component.puml` (component/MVC)  
-  • 05 Sequence: CRUD 4 đối tượng & luồng nhận phòng (core)  
-• Có thể xem trực tiếp file `.puml` bằng VSCode extension hoặc qua plantuml online server  
+### 2.2 Staff (Nhân viên)
+#### 2.2.1 Attribute
+- `id`: Long
+- `name`: String
+- `role`: String (bác sĩ, y tá...)
+- `phone`: String
+- `email`: String
 
-## Giao diện
-• Giao diện xây dựng bằng Thymeleaf và Bootstrap (CSS framework) để tạo bố cục rõ ràng, dễ dùng  
+#### 2.2.2 Methods
+- `getters / setters`
+- `toString()`
 
-### Navbar (thanh menu trên đầu trang) mô phỏng các module quản lý chính:
-• Bệnh nhân  
-• Bác sĩ & Nhân viên  
-• Khoa/Phòng  
-• Phòng/Giường  
-• Thiết bị  
-• Nhận phòng  
+---
 
-### Mỗi module có:
-• Form nhập liệu (dùng Bootstrap form)  
-→ Cho phép Thêm mới và Chỉnh sửa thông tin  
-• Bảng danh sách dữ liệu (sử dụng bảng Bootstrap)  
-→ Hiển thị dữ liệu và có nút Sửa / Xóa  
+### 2.3 Room (Phòng)
+#### 2.3.1 Attribute
+- `id`: Long
+- `roomNumber`: String
+- `capacity`: int – số giường
+- `occupied`: int – số giường đã sử dụng
+- `department`: Department – khoa liên kết
 
-## Thao tác hỗ trợ:
-| Thao tác | Mô tả |
-|----------|--------|
-| Thêm     | Nhấn nút "Thêm mới", hiển thị form để nhập dữ liệu |
-| Sửa      | Trong bảng có nút "Sửa" để chỉnh sửa thông tin     |
-| Xóa      | Trong bảng có nút "Xóa", xác nhận và xóa bản ghi   |
+#### 2.3.2 Methods
+- `assignPatient()`
+- `releasePatient()`
+- `getAvailableBeds()`
+
+---
+
+### 2.4 Department (Khoa)
+#### 2.4.1 Attribute
+- `id`: Long
+- `name`: String
+- `description`: String
+
+#### 2.4.2 Methods
+- `getters / setters`
+- `toString()`
+
+---
+
+### 2.5 Equipment (Thiết bị)
+#### 2.5.1 Attribute
+- `id`: Long
+- `name`: String
+- `status`: String (còn sử dụng, đang sửa...)
+
+#### 2.5.2 Methods
+- `markAsInUse()`
+- `markAsAvailable()`
+
+---
+
+### 2.6 Admission (Nhập viện)
+#### 2.6.1 Attribute
+- `id`: Long
+- `patient`: Patient
+- `room`: Room
+- `admissionDate`: LocalDate
+- `dischargeDate`: LocalDate (nullable)
+
+#### 2.6.2 Methods
+- `admitPatientToRoom()`
+- `dischargePatient()`
+- `calculateStayDuration()
