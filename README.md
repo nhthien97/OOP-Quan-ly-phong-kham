@@ -1,11 +1,51 @@
 # OOP-QL-PK – Quản lý phòng khám
+- Tên dự án: Xây dựng hệ thống quản lý phòng khám
+#  MỤC LỤC
+
+1. [Giới thiệu chung](#1-giới-thiệu-chung)  
+   - [Thành viên dự án](#11-thành-viên-dự-án)  
+   - [Yêu cầu chính](#12-yêu-cầu-chính)  
+   - [Mô tả cụ thể](#13-mô-tả-cụ-thể)
+
+2. [Object (Đối tượng chính)](#2-object-đối-tượng-chính)  
+   - [Patient (Bệnh nhân)](#21-patient-bệnh-nhân)  
+   - [Staff (Nhân viên)](#22-staff-nhân-viên)  
+   - [Room (Phòng)](#23-room-phòng)  
+   - [Department (Khoa)](#24-department-khoa)  
+   - [Equipment (Thiết bị)](#25-equipment-thiết-bị)  
+   - [Admission (Nhập viện)](#26-admission-nhập-viện)
+
+3. [Sơ đồ hệ thống](#3-sơ-đồ-hệ-thống)  
+   - [Sơ đồ khối tổng thể hệ thống](#31-sơ-đồ-khối-tổng-thể-hệ-thống)  
+   - [Sơ đồ lớp / ERD](#32-sơ-đồ-lớp-class-diagram--erd)  
+     - [Đăng nhập / Đăng xuất](#321-đăng-nhập--đăng-xuất-hệ-thống)  
+     - [Luồng hoạt động người dùng](#322-toàn-bộ-luồng-hoạt-động-người-dùng-trong-hệ-thống)  
+     - [CRUD Bệnh nhân](#323-crud-bệnh-nhân-patient)  
+     - [CRUD Nhân viên](#324-crud-nhân-viên-staff)  
+     - [CRUD Phòng bệnh](#325-crud-phòng-bệnh-room)  
+     - [CRUD Khoa](#326-crud-khoa-department)  
+     - [CRUD Thiết bị](#327-crud-thiết-bị-equipment)  
+     - [Luồng nhập viện / xuất viện](#328-luồng-nhập-viện--xuất-viện-admission)
+
+4. [Giao diện chính](#4-giao-diện-chính)  
+   - [Đăng nhập](#41-đăng-nhập)  
+   - [Trang chủ (Dashboard)](#42-trang-chủ-dashboard)  
+   - [Quản lý bệnh nhân](#43-quản-lý-bệnh-nhân)  
+   - [Quản lý nhân viên](#44-quản-lý-nhân-viên)  
+   - [Quản lý phòng bệnh](#45-quản-lý-phòng-bệnh)  
+   - [Quản lý khoa](#46-quản-lý-khoa)  
+   - [Quản lý thiết bị y tế](#47-quản-lý-thiết-bị-y-tế)  
+   - [Quản lý nhập viện / xuất viện](#48-quản-lý-nhập-viện--xuất-viện)  
+   - [Đăng xuất](#49-đăng-xuất)
+
+5. [Triển khai](#triển-khai)
 
 ---
 
 ## 1. Giới thiệu chung
 
 ### 1.1 Thành viên dự án
-- Nguyễn Hoàng Thiên 
+- Nguyễn Hoàng Thiên - 23010139
 - ...
 - ...
 
@@ -14,18 +54,51 @@
 - Hỗ trợ chức năng **CRUD đầy đủ** cho các thực thể: Bệnh nhân, Nhân viên, Phòng, Khoa, Thiết bị, Nhập viện
 - Giao diện web dễ sử dụng (sử dụng Thymeleaf + Bootstrap)
 - Xử lý lỗi toàn cục và kiểm thử nghiệp vụ
-- Vẽ sơ đồ UML cho kiến trúc và các luồng xử lý chính
-
 ### 1.3 Mô tả cụ thể
-- Ngôn ngữ: Java 17 (jdk 17.0.17-amzn)
-- Framework: Spring Boot 3
-- ORM: Spring Data JPA
-- UI: Thymeleaf, Bootstrap
-- Bảo mật: Spring Security
-- Cơ sở dữ liệu: H2 (dev), MySQL (production - cấu hình thủ công)
-- UML: PlantUML
-- Kiểm thử: JUnit 5
-- Build tool: Maven
+####  Quản lý tài khoản
+- Đăng nhập, đăng xuất hệ thống.
+- Phân quyền người dùng theo vai trò (Admin, Bác sĩ, Y tá, Nhân viên lễ tân).
+
+---
+
+####  Quản lý bệnh nhân (Patient)
+- Thêm, sửa, xóa hồ sơ bệnh nhân.
+- Lưu trữ thông tin chi tiết: họ tên, ngày sinh, giới tính, địa chỉ, số điện thoại.
+- Tìm kiếm bệnh nhân theo tên hoặc mã định danh.
+
+---
+
+####  Quản lý nhân viên (Staff)
+- Quản lý danh sách nhân sự (bác sĩ, y tá, kỹ thuật viên…).
+- Thêm mới, cập nhật, xóa thông tin nhân viên.
+
+---
+
+####  Quản lý phòng bệnh (Room)
+- Quản lý danh sách phòng và giường bệnh.
+- Thêm, sửa, xóa thông tin phòng (số phòng, tầng, loại phòng, sức chứa…).
+- Theo dõi số lượng giường trống và giường đã sử dụng.
+- Tự động cập nhật trạng thái phòng khi bệnh nhân nhập viện hoặc xuất viện.
+
+---
+
+####  Quản lý khoa (Department)
+- Quản lý các khoa trong bệnh viện (nội, ngoại, sản, nhi...).
+- Thêm, sửa, xóa thông tin khoa.
+
+---
+
+####  Quản lý thiết bị y tế (Equipment)
+- Quản lý danh sách thiết bị y tế theo từng phòng hoặc khoa.
+- Thêm, sửa, xóa thông tin thiết bị (tên, mã, trạng thái, mô tả).
+- Theo dõi tình trạng sử dụng: đang hoạt động, bảo trì, hỏng.
+
+---
+
+####  Quản lý hồ sơ nhập viện (Admission)
+- Ghi nhận thông tin nhập viện của bệnh nhân: phòng, thời gian vào viện, bác sĩ phụ trách.
+- Cập nhật ngày xuất viện, tự động điều chỉnh số giường trống.
+- Kết nối trực tiếp với module **Patient** và **Room** để đồng bộ dữ liệu.
 
 ---
 
@@ -291,7 +364,7 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 
 ---
 
-## Triển Khai
+## 5. Triển Khai
 - Link Github Source Code: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6.github.dev/
 - Link Youtube demo ứng dụng: 
 - Link trang web chính thức: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/
