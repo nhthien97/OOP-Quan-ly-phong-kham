@@ -5,8 +5,9 @@
 ## 1. Giới thiệu chung
 
 ### 1.1 Thành viên dự án
-- Nguyễn Hoàng Thiên *(người đóng góp chính – ví dụ từ metadata VSCode)*
-- Các thành viên khác có thể bổ sung vào đây nếu có
+- Nguyễn Hoàng Thiên 
+- ...
+- ...
 
 ### 1.2 Yêu cầu chính
 - Xây dựng một hệ thống quản lý phòng khám theo kiến trúc **Spring Boot MVC**
@@ -201,3 +202,99 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 
 📷 **Hình: Quy trình nhập viện / trả phòng**  
 ![Admission Process](src/docs/img/07_admission_process.png)
+
+---
+
+## 4. Giao diện chính
+
+### 4.1 Đăng nhập
+- Người dùng truy cập `/login` để nhập username và password.
+- Sử dụng Spring Security để kiểm tra xác thực.
+- Nếu sai sẽ hiện thông báo lỗi, nếu đúng chuyển đến trang chủ.
+📷 **Hình: Giao diện đăng nhập**  
+![Login UI](src/docs/img/ui_login.png)
+
+---
+
+### 4.2 Trang chủ (Dashboard)
+- Hiển thị tổng quan hệ thống: số lượng bệnh nhân, nhân viên, thiết bị, phòng đang hoạt động...
+- Các nút truy cập nhanh đến các module như: Quản lý bệnh nhân, Phòng, Khoa, Thiết bị...
+
+📷 **Hình: Giao diện trang chủ (Dashboard)**  
+![Dashboard](src/docs/img/ui_dashboard.png)
+
+---
+
+### 4.3 Quản lý bệnh nhân
+- Danh sách bệnh nhân hiện tại.
+- Chức năng: Thêm mới, sửa, xóa, tìm kiếm.
+- Hiển thị các thông tin: tên, ngày sinh, giới tính, số điện thoại...
+
+📷 **Hình: Giao diện quản lý bệnh nhân**  
+![Patient UI](src/docs/img/ui_patient.png)
+
+---
+
+### 4.4 Quản lý nhân viên
+- Danh sách nhân sự: bác sĩ, y tá, nhân viên hành chính...
+- Có thể chỉnh sửa thông tin, phân công, xóa hoặc thêm mới.
+
+📷 **Hình: Giao diện quản lý nhân viên**  
+![Staff UI](src/docs/img/ui_staff.png)
+
+---
+
+### 4.5 Quản lý phòng bệnh
+- Xem danh sách các phòng theo từng tầng/khoa.
+- Số lượng giường, trạng thái (đang sử dụng, còn trống).
+- Cho phép thêm, cập nhật phòng.
+
+📷 **Hình: Giao diện quản lý phòng bệnh**  
+![Room UI](src/docs/img/ui_room.png)
+
+---
+
+### 4.6 Quản lý khoa
+- Danh sách các khoa: nội, ngoại, hồi sức, cấp cứu...
+- Quản lý trưởng khoa, mô tả nhiệm vụ, danh sách phòng trong khoa đó.
+
+📷 **Hình: Giao diện quản lý khoa**  
+![Department UI](src/docs/img/ui_department.png)
+
+---
+
+### 4.7 Quản lý thiết bị y tế
+- Xem danh sách thiết bị: mã thiết bị, mô tả, trạng thái hoạt động.
+- Giao diện dễ thao tác thêm/xóa/sửa nhanh thiết bị.
+- Có phân công nhân viên bảo trì.
+
+📷 **Hình: Giao diện quản lý thiết bị**  
+![Equipment UI](src/docs/img/ui_equipment.png)
+
+---
+
+### 4.8 Quản lý nhập viện / xuất viện
+- Giao diện chọn bệnh nhân, chọn phòng để nhập viện.
+- Khi xuất viện chỉ cần bấm "Trả phòng", hệ thống cập nhật trạng thái phòng.
+
+📷 **Hình: Giao diện nhập viện / xuất viện**  
+![Admission UI](src/docs/img/ui_admission.png)
+
+---
+
+### 4.9 Đăng xuất
+- Nút "Đăng xuất" luôn hiển thị trên thanh điều hướng.
+- Khi click sẽ xóa session, chuyển về màn hình đăng nhập.
+
+📷 **Hình: Giao diện khi đăng xuất thành công**  
+![Logout UI](src/docs/img/ui_login.png)
+
+---
+
+## Triển Khai
+- Link Github Source Code: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6.github.dev/
+- Link Youtube demo ứng dụng: 
+- Link trang web chính thức: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/
+- Link trang web h2-console: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/h2-console
+- Tài Khoản: 23010139@st.phenikaa-uni.edu.vn
+- Mật khẩu: nhom14
