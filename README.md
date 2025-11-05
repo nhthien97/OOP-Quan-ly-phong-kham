@@ -111,3 +111,92 @@
 - `admitPatientToRoom()`
 - `dischargePatient()`
 - `calculateStayDuration()
+
+## 3. Sơ đồ hệ thống
+
+### 3.1 Sơ đồ khối tổng thể hệ thống
+
+Hệ thống được tổ chức theo các nhóm chức năng chính:
+- Hệ thống đăng nhập / phân quyền: Quản lý người dùng, session, đăng nhập, đăng xuất.
+- Nghiệp vụ phòng khám: Quản lý bệnh nhân, nhân viên, khoa, phòng, thiết bị và hồ sơ nhập viện.
+- Luồng xử lý chính: Từ đăng nhập → Dashboard → chọn chức năng CRUD các module → nhập viện → theo dõi → đăng xuất.
+
+📷 **Hình: Sơ đồ khối tổng quan**  
+![Sơ đồ tổng thể](src/docs/img/08_overall_flow.png)
+
+---
+
+### 3.2 Sơ đồ lớp (Class Diagram / ERD)
+
+#### 3.2.1 Đăng nhập / Đăng xuất hệ thống
+- Mô tả quá trình xác thực người dùng với Spring Security khi truy cập vào hệ thống.
+- Bao gồm các trường hợp:
+  - Đăng nhập thành công → chuyển hướng về /home.
+  - Đăng nhập thất bại → trả lỗi xác thực.
+  - Đăng xuất → xóa session, chuyển về trang login.
+
+📷 **Hình: Đăng nhập / Đăng xuất**  
+![Đăng nhập / Đăng xuất](src/docs/img/01_login_logout.png)
+
+---
+
+#### 3.2.2 Toàn bộ luồng hoạt động người dùng trong hệ thống
+- Tổng quan hành vi người dùng từ lúc đăng nhập → thao tác CRUD bệnh nhân → nhập viện → đăng xuất.
+- Mô hình hóa các controller chính: Login, Patient, Admission, Logout.
+
+📷 **Hình: Toàn bộ luồng hoạt động**  
+![Toàn bộ luồng hoạt động](src/docs/img/08_overall_flow.png)
+
+---
+
+#### 3.2.3 CRUD Bệnh nhân (Patient)
+- Thêm mới, xem danh sách, chỉnh sửa, xóa bệnh nhân.
+- Tương tác giữa: `PatientController`, `PatientService`, `PatientRepo`, `DB`.
+
+📷 **Hình: CRUD Bệnh nhân (Patient)**  
+![CRUD Patient](src/docs/img/02_crud_patient.png)
+
+---
+
+#### 3.2.4 CRUD Nhân viên (Staff)
+- Quản lý nhân sự trong phòng khám.
+- Bao gồm thêm mới, chỉnh sửa, xóa nhân viên.
+
+📷 **Hình: CRUD Nhân viên (Staff)**  
+![CRUD Staff](src/docs/img/03_crud_staff.png)
+
+---
+
+#### 3.2.5 CRUD Phòng bệnh (Room)
+- Quản lý thông tin phòng bệnh, số lượng giường trống, loại phòng.
+- Khi nhập viện hệ thống sẽ cập nhật trạng thái phòng.
+
+📷 **Hình: CRUD Phòng bệnh (Room)**  
+![CRUD Room](src/docs/img/04_crud_room.png)
+
+---
+
+#### 3.2.6 CRUD Khoa (Department)
+- Quản lý các khoa như nội trú, ngoại trú...
+- Gắn trưởng khoa và danh sách phòng trực thuộc.
+
+📷 **Hình: CRUD Khoa (Department)**  
+![CRUD Department](src/docs/img/05_crud_department.png)
+
+---
+
+#### 3.2.7 CRUD Thiết bị (Equipment)
+- Quản lý thiết bị trong từng phòng.
+- Gắn trách nhiệm bảo trì cho từng nhân viên.
+
+📷 **Hình: CRUD Thiết bị (Equipment)**  
+![CRUD Equipment](src/docs/img/06_crud_equipment.png)
+
+---
+
+#### 3.2.8 Luồng nhập viện / xuất viện (Admission)
+- Bệnh nhân được nhập viện (chọn phòng + ghi nhận thời gian).
+- Khi xuất viện: cập nhật ngày ra và giảm số giường đã dùng.
+
+📷 **Hình: Quy trình nhập viện / trả phòng**  
+![Admission Process](src/docs/img/07_admission_process.png)
