@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<!-- ✅ Fragment Header -->
+<!--  Fragment Header -->
 <div th:fragment="_header">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
     <div class="container">
@@ -27,7 +27,7 @@
           <li class="nav-item"><a class="nav-link" href="/equipment">Thiết bị</a></li>
           <li class="nav-item"><a class="nav-link" href="/admissions">Nhận phòng</a></li>
 
-          <!-- 👤 Hiển thị tên người dùng -->
+          <!--  Hiển thị tên người dùng -->
           <li class="nav-item d-flex align-items-center text-white px-2"
               th:if="${#authentication != null and #authentication.authenticated}">
             <span class="navbar-text">
@@ -35,7 +35,7 @@
             </span>
           </li>
 
-          <!-- 🔓 Nút Đăng xuất -->
+          <!--  Nút Đăng xuất -->
           <li class="nav-item" th:if="${#authentication != null and #authentication.authenticated}">
             <form th:action="@{/logout}" method="post" class="d-inline">
               <button type="submit" class="btn btn-link nav-link" style="padding: 0;">

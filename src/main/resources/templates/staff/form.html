@@ -11,37 +11,30 @@
 
 <div class="container mt-4">
     <h4 class="text-primary mb-3"
-        th:text="${staff.id == null ? '➕ Thêm nhân viên mới' : '✏ Sửa thông tin nhân viên'}"></h4>
-
+        th:text="${staff.id == null ? ' Thêm nhân viên mới' : ' Sửa thông tin nhân viên'}"></h4>
     <form th:action="@{/staff/save}" th:object="${staff}" method="post"
           class="bg-white p-4 rounded shadow-sm border">
         <input type="hidden" th:field="*{id}"/>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Mã nhân viên</label>
             <input type="text" class="form-control" th:field="*{code}" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Họ và tên</label>
             <input type="text" class="form-control" th:field="*{fullName}" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Chức vụ</label>
             <input type="text" class="form-control" th:field="*{role}">
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Số điện thoại</label>
             <input type="text" class="form-control" th:field="*{phone}">
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">CMND/CCCD</label>
             <input type="text" class="form-control" th:field="*{idCard}">
         </div>
-
         <div class="mb-3">
             <label class="form-label fw-bold">Khoa</label>
             <select class="form-select" name="department">

@@ -12,15 +12,13 @@
 
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-        <h3 class="text-primary mb-2">👩‍⚕️ Danh sách Bác sĩ & Nhân viên</h3>
-
+        <h3 class="text-primary mb-2"> Danh sách Bác sĩ & Nhân viên</h3>
         <!-- Form tìm kiếm -->
         <form class="d-flex mb-2" th:action="@{/staff}" method="get">
             <input class="form-control me-2" type="search" name="keyword"
-                   th:value="${keyword}" placeholder="🔍 Tìm theo mã hoặc tên...">
+                   th:value="${keyword}" placeholder=" Tìm theo mã hoặc tên...">
             <button class="btn btn-outline-primary" type="submit">Tìm</button>
         </form>
-
         <div>
             <a href="/staff/new" class="btn btn-success mb-2">➕ Thêm nhân viên</a>
             <a href="/" class="btn btn-secondary mb-2">🏠 Trang chính</a>

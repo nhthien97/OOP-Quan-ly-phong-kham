@@ -7,18 +7,18 @@
 </head>
 <body class="bg-light">
 
-  <!-- ✅ Header -->
+  <!-- Header -->
   <th:block th:replace="~{_header :: _header}"></th:block>
 
   <div class="container mt-4">
 
-    <!-- 🧭 Thanh tiêu đề + tìm kiếm -->
+    <!--  Thanh tiêu đề + tìm kiếm -->
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-      <h3 class="text-primary mb-2">🧍 Danh sách bệnh nhân</h3>
+      <h3 class="text-primary mb-2"> Danh sách bệnh nhân</h3>
 
       <form class="d-flex mb-2" th:action="@{/patients}" method="get">
         <input class="form-control me-2" type="search" name="keyword"
-               th:value="${keyword}" placeholder="🔍 Tìm theo mã hoặc tên..." aria-label="Search">
+               th:value="${keyword}" placeholder=" Tìm theo mã hoặc tên..." aria-label="Search">
         <button class="btn btn-outline-primary" type="submit">Tìm</button>
       </form>
 

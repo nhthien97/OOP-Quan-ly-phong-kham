@@ -14,33 +14,27 @@
 
     <!-- Tiêu đề động -->
     <h4 class="text-primary mb-3" 
-        th:text="${patient.id == null ? '➕ Thêm bệnh nhân mới' : '✏ Sửa thông tin bệnh nhân'}"></h4>
-
+        th:text="${patient.id == null ? ' Thêm bệnh nhân mới' : ' Sửa thông tin bệnh nhân'}"></h4>
     <!-- Form nhập liệu -->
     <form th:action="@{/patients/save}" th:object="${patient}" method="post" 
           class="bg-white p-4 rounded shadow-sm border">
-
         <!-- ID ẩn (dùng khi sửa) -->
         <input type="hidden" th:field="*{id}" />
-
         <!-- Mã bệnh nhân -->
         <div class="mb-3">
             <label class="form-label fw-bold">Mã bệnh nhân</label>
             <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã bệnh nhân" required>
         </div>
-
         <!-- Họ tên -->
         <div class="mb-3">
             <label class="form-label fw-bold">Họ và tên</label>
             <input type="text" class="form-control" th:field="*{fullName}" placeholder="Nhập họ tên" required>
         </div>
-
         <!-- Địa chỉ -->
         <div class="mb-3">
             <label class="form-label fw-bold">Địa chỉ</label>
             <input type="text" class="form-control" th:field="*{address}" placeholder="Nhập địa chỉ">
         </div>
-
         <!-- Số điện thoại -->
         <div class="mb-3">
             <label class="form-label fw-bold">Số điện thoại</label>

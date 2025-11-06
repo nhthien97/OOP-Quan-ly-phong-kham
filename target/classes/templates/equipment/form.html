@@ -11,12 +11,10 @@
 <th:block th:replace="~{_header :: _header}"></th:block>
 
 <div class="container mt-4">
-  <h4 class="text-primary mb-3" th:text="${item.id == null ? '➕ Thêm thiết bị mới' : '✏ Cập nhật thiết bị'}"></h4>
-
-  <!-- ✅ ✅ ĐÂY LÀ FORM ĐÃ SỬA -->
+  <h4 class="text-primary mb-3" th:text="${item.id == null ? ' Thêm thiết bị mới' : ' Cập nhật thiết bị'}"></h4>
+  <!--  FORM ĐÃ SỬA -->
   <form th:action="@{/equipment}" method="post" th:object="${item}"
         class="bg-white p-4 rounded shadow-sm border">
-
     <div class="row">
       <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Mã thiết bị</label>
@@ -27,7 +25,6 @@
         <input class="form-control" th:field="*{name}" required>
       </div>
     </div>
-
     <div class="row">
       <div class="col-md-6 mb-3">
         <label class="form-label fw-bold">Trạng thái</label>

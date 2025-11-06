@@ -295,6 +295,7 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 
 📷 **Hình: Giao diện trang chủ (Dashboard)**  
 ![Dashboard](src/docs/img/ui_dashboard.png)
+![Dashboard](src/docs/img/ui_dashboard2.png)
 
 ---
 

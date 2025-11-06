@@ -16,11 +16,10 @@
       box-shadow: 0 0 20px rgba(0,0,0,0.15);
     }
 
-    /* ✅ Slide ảnh chỉnh để ảnh hiển thị từ đỉnh */
     .carousel-background {
-      height: 350px; /* Tăng chiều cao nếu muốn ảnh hiển thị rõ hơn */
+      height: 350px;
       background-size: cover;
-      background-position: center top; /* 👈 Hiển thị từ đầu ảnh */
+      background-position: center top;
       position: relative;
     }
 
@@ -30,7 +29,7 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* lớp phủ mờ */
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
       display: flex;
       flex-direction: column;
@@ -46,11 +45,9 @@
   <!-- Header -->
   <th:block th:replace="~{_header :: _header}"></th:block>
 
-  <!-- ✅ Banner (carousel ảnh) -->
+  <!-- Banner (carousel ảnh) -->
   <div id="clinicCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-
-      <!-- Slide 1 -->
       <div class="carousel-item active">
         <div class="carousel-background" style="background-image: url('/images/cho1.jpg');">
           <div class="overlay">
@@ -59,8 +56,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Slide 2 -->
       <div class="carousel-item">
         <div class="carousel-background" style="background-image: url('/images/cho2.jpg');">
           <div class="overlay">
@@ -69,10 +64,8 @@
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- Nút điều hướng -->
     <button class="carousel-control-prev" type="button" data-bs-target="#clinicCarousel" data-bs-slide="prev">
       <span class="carousel-control-prev-icon"></span>
     </button>
@@ -81,10 +74,61 @@
     </button>
   </div>
 
+  <!-- 🔽 Thống kê tổng quan -->
+  <div class="container mt-5">
+    <h3 class="mb-4">Thống kê tổng quan</h3>
+    <div class="row text-center justify-content-center">
+      <div class="col-md-2 mb-3">
+        <div class="card border-primary shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-person-lines-fill display-6 text-primary"></i>
+            <h6 class="card-title mt-2">Bệnh nhân</h6>
+            <p class="card-text fs-4 fw-bold" th:text="${patientCount}">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <div class="card border-success shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-people-fill display-6 text-success"></i>
+            <h6 class="card-title mt-2">Nhân viên</h6>
+            <p class="card-text fs-4 fw-bold" th:text="${staffCount}">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <div class="card border-info shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-door-open-fill display-6 text-info"></i>
+            <h6 class="card-title mt-2">Phòng</h6>
+            <p class="card-text fs-4 fw-bold" th:text="${roomCount}">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <div class="card border-danger shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-gear-fill display-6 text-danger"></i>
+            <h6 class="card-title mt-2">Thiết bị</h6>
+            <p class="card-text fs-4 fw-bold" th:text="${equipmentCount}">0</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2 mb-3">
+        <div class="card border-secondary shadow-sm">
+          <div class="card-body">
+            <i class="bi bi-hospital-fill display-6 text-secondary"></i>
+            <h6 class="card-title mt-2">Nhập viện</h6>
+            <p class="card-text fs-4 fw-bold" th:text="${admissionCount}">0</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Menu chức năng -->
   <div class="container my-5">
     <div class="row g-4">
-
       <div class="col-md-4">
         <a href="/patients" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-primary border-2">
@@ -94,7 +138,6 @@
           </div>
         </a>
       </div>
-
       <div class="col-md-4">
         <a href="/staff" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-success border-2">
@@ -104,7 +147,6 @@
           </div>
         </a>
       </div>
-
       <div class="col-md-4">
         <a href="/departments" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-warning border-2">
@@ -114,7 +156,6 @@
           </div>
         </a>
       </div>
-
       <div class="col-md-4">
         <a href="/rooms" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-info border-2">
@@ -124,7 +165,6 @@
           </div>
         </a>
       </div>
-
       <div class="col-md-4">
         <a href="/equipment" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-danger border-2">
@@ -134,7 +174,6 @@
           </div>
         </a>
       </div>
-
       <div class="col-md-4">
         <a href="/admissions" class="text-decoration-none text-dark">
           <div class="card menu-card text-center p-4 border-secondary border-2">
@@ -144,7 +183,6 @@
           </div>
         </a>
       </div>
-
     </div>
   </div>
 

@@ -34,12 +34,12 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ✅ Cấu hình tài khoản mặc định
+    //  Cấu hình tài khoản mặc định
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
-            .username("23010139@st.phenikaa-uni.edu.vn") // 👈 tài khoản đăng nhập
-            .password("nhom14")                           // 👈 mật khẩu đăng nhập
+            .username("23010139@st.phenikaa-uni.edu.vn") //  tài khoản đăng nhập
+            .password("nhom14")                           //  mật khẩu đăng nhập
             .roles("ADMIN")
             .build();
 
