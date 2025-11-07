@@ -38,7 +38,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
-            .username("23010139@st.phenikaa-uni.edu.vn") //  tài khoản đăng nhập
+            .username("nhom14") //  tài khoản đăng nhập
             .password("nhom14")                           //  mật khẩu đăng nhập
             .roles("ADMIN")
             .build();
