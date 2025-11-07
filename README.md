@@ -46,7 +46,7 @@
 
 ### 1.1 Thành viên dự án
 - Nguyễn Hoàng Thiên - 23010139
-- ...
+- Phạm Ngọc Vũ - 23010192
 - ...
 
 ### 1.2 Yêu cầu chính

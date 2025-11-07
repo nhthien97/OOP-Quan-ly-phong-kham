@@ -6,8 +6,8 @@
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Staff.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/ClinicApp.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/EquipmentRepo.java
-/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Patient.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/DepartmentRepo.java
+/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Patient.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/DepartmentController.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/RoomRepo.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/StaffController.java
@@ -20,5 +20,5 @@
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/web/PatientController.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/domain/Admission.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/AdmissionRepo.java
-/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/PatientRepo.java
 /workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/StaffRepo.java
+/workspaces/OOP-Quan-ly-phong-kham/src/main/java/com/clinic/repo/PatientRepo.java
