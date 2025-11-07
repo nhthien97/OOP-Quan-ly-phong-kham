@@ -370,5 +370,5 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 - Link Youtube demo ứng dụng: https://youtu.be/z0pnWYRd8Pw?feature=shared
 - Link trang web chính thức: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/
 - Link trang web h2-console: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/h2-console
-- Tài Khoản: 23010139@st.phenikaa-uni.edu.vn
+- Tài Khoản(Toàn quyền): nhom14
 - Mật khẩu: nhom14
