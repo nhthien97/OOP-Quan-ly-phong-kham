@@ -372,3 +372,36 @@ Hệ thống được tổ chức theo các nhóm chức năng chính:
 - Link trang web h2-console: https://shiny-space-garbanzo-4j9vwx7759vj2q5v6-8080.app.github.dev/h2-console
 - Tài Khoản(Toàn quyền): nhom14
 - Mật khẩu: nhom14
+## Toàn bộ cách chạy và cài đặt môi trường 
+## Cài java version 
+- 1.Chạy lệnh sau để cài:
+- sdk install java 17.0.17-amzn
+- 2. Dùng Java 17 tạm thời (cho phiên hiện tại)
+- sdk use java 17.0.17-amzn
+- 3. Đặt Java 17 làm mặc định vĩnh viễn (tự động khi mở terminal mới)
+- sdk default java 17.0.17-amzn
+- chạy xong kiểm tra lại lại bằng lệnh trên 
+
+  ## Cài extension 
+- code --install-extension vscjava.vscode-java-pack \
+- && code --install-extension vmware.vscode-spring-boot \
+- && code --install-extension formulahendry.code-runner \
+- && code --install-extension adashen.vscode-tomcat \
+- && code --install-extension mtxr.sqltools \
+- && code --install-extension mtxr.sqltools-driver-h2 \
+- && code --install-extension GabrielBB.vscode-lombok
+
+ ## Dọn cache & chạy lại
+- mvn clean compile
+- mvn spring-boot:run
+
+## Test H2 
+- SELECT * FROM PATIENT;
+- SELECT * FROM STAFF;
+- SELECT * FROM DEPARTMENT;
+- SELECT * FROM ROOM;
+- SELECT * FROM EQUIPMENT;
+
+
+
+
